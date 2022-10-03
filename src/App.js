@@ -1,9 +1,9 @@
 import './App.css';
-import { Test } from './components/Test.tsx';
+import { Header } from './components/Header/Header.tsx';
 
 function App() {
   return (
-    <Test />
+    <Header />
   );
 }
 
