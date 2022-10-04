@@ -7,10 +7,12 @@ export const Header: FC = () => {
     return (
         <HeaderContainer>
             <LogoMenuContainer>
-                <LogoContainer>
-                    <MainLogoImg src={mainLogo} />
-                    <MainLogoName>Neko Heaven</MainLogoName>
-                </LogoContainer>
+                <LogoLink href="/">
+                    <LogoContainer>
+                        <MainLogoImg src={mainLogo} />
+                        <MainLogoName>Neko Heaven</MainLogoName>
+                    </LogoContainer>
+                </LogoLink>
                 <MenuUl>
                     <MenuLi>
                         <MenuLink href="/">Categories</MenuLink>
@@ -49,14 +51,29 @@ const LogoContainer = styled.div`
 `
 const MenuUl = styled.ul`
     display: flex;
-    gap: 20%;
+    gap: 15%;
+    height: 100%;
 `
 const MenuLi = styled.li`
     list-style: none;
+    height: 100%;
+    display: flex;
 `
 const MenuLink = styled.a`
     color: white;
     text-decoration: none;
+    font-size: 24px;
+    font-family: "PolyRegular";
+    height: 100%;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+const LogoLink = styled.a`
+    height: 100%;
+    text-decoration: none;
+    vertical-align: center;
 `
 const MainLogoImg = styled.img`
     alt: "";
@@ -65,6 +82,8 @@ const MainLogoImg = styled.img`
 const MainLogoName = styled.span`
     color: white;
     white-space: nowrap;
+    font-size: 24px;
+    font-family: "InterSemiBold";
 `
 const SearchImg = styled.img`
     alt: "";

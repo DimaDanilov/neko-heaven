@@ -11,3 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: "InterSemiBold";
+  src: local("InterSemiBold"),
+    url("./assets/fonts/Inter-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+}
+@font-face {
+  font-family: "PolyRegular";
+  src: local("PolyRegular"),
+    url("./assets/fonts/Poly-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
