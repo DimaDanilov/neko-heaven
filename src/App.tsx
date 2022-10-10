@@ -1,6 +1,6 @@
 import './App.css';
-import { Header } from './components/Header/Header.tsx';
-import { CatSlider } from './components/CatSlider/CatSlider.tsx';
+import { Header } from './components/Header/Header';
+import { CatSlider } from './components/CatSlider/CatSlider';
 
 function App() {
   return (

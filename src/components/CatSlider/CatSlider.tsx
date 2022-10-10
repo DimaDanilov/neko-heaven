@@ -1,5 +1,4 @@
-import React from "react"
-import { SliderItem } from "./SliderItem.tsx"
+import { SliderItem } from "./SliderItem"
 
 export const CatSlider = () => {
     return (
