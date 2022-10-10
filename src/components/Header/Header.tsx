@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import styled from 'styled-components';
 import mainLogo from '../../assets/icons/neko-heaven-logo.svg';
 import searchIcon from '../../assets/icons/search-icon.svg';
@@ -23,7 +23,6 @@ export const Header: FC = () => {
                 </MenuUl>
             </LogoMenuContainer>
             <SearchImg src={searchIcon} />
-
         </HeaderContainer>
     )
 }
