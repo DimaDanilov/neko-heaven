@@ -11,7 +11,7 @@ import sevenImg from '../../assets/images/7.png';
 import eightImg from '../../assets/images/8.png';
 
 
-const scrollMultiplier = 0.2;
+const scrollMultiplier = 0.4;
 const screenWidth = window.innerWidth
 
 export const CatSlider: FC = () => {
@@ -59,6 +59,9 @@ export const CatSlider: FC = () => {
 const SliderContainer = styled.section`
     height: calc(100vh - 50px);
     padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
     overflow: hidden;
     box-sizing: border-box;
@@ -69,7 +72,7 @@ const ImgContainer = styled.div`
     overflow-x: auto;
     scroll-behavior: smooth;
     gap: 8%;
-    height: 100%;
+    height: 80%;
     &::-webkit-scrollbar {
         display: none;
     }
