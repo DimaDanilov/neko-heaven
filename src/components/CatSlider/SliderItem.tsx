@@ -28,7 +28,7 @@ export const SliderItem: FC<SliderItemProps> = ({ imgSource, windowWidth, curren
             } else
                 setImageHeight(0) // If img scale should be lower than 0 then set scale to 0 (just in case)
         }
-    }, [currentCenter]);
+    }, [currentCenter, windowWidth]);
 
     return <SliderImage ref={imgRef} src={imgSource} imageScale={imageHeight} />
 }
