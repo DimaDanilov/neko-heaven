@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState, FC } from "react";
+import { useRef, useState, FC, ReactElement } from "react";
 import styled from 'styled-components';
 import { SliderItem } from "./SliderItem"
 import oneImg from '../../assets/images/1.png';
@@ -10,31 +10,24 @@ import sixImg from '../../assets/images/6.png';
 import sevenImg from '../../assets/images/7.png';
 import eightImg from '../../assets/images/8.png';
 
-
-const scrollMultiplier = 0.4;
+const scrollSpeedMultiplier = 0.4;
 const screenWidth = window.innerWidth
 
-export const CatSlider: FC = () => {
+export const CatSlider: FC = (): ReactElement => {
     const divRef = useRef<HTMLDivElement>(null);
-    const [width, setWidth] = useState(0); // Width of container to move slider on width of container
     const [currentCenter, setCurrentCenter] = useState(screenWidth / 2)
 
-    // Find width of container to move slider
-    useLayoutEffect(() => {
-        if (divRef.current)
-            setWidth(divRef.current.offsetWidth);
-    }, []);
-
-    const wheelHandler = (e: React.WheelEvent<HTMLDivElement>, width: number) => {
+    // Scrolling event
+    const wheelHandler = (e: React.WheelEvent<HTMLDivElement>, screenWidth: number) => {
         if (divRef.current) {
             if (e.deltaY > 0)
-                divRef.current.scrollLeft += width * scrollMultiplier
+                divRef.current.scrollLeft += screenWidth * scrollSpeedMultiplier
             else
-                divRef.current.scrollLeft -= width * scrollMultiplier
-            console.log(divRef.current.scrollLeft + screenWidth / 2)
+                divRef.current.scrollLeft -= screenWidth * scrollSpeedMultiplier
         }
     }
 
+    // Change of center of the scroll
     const scrollHandle = (e: React.UIEvent<HTMLDivElement>) => {
         if (divRef.current)
             setCurrentCenter(divRef.current.scrollLeft + screenWidth / 2) // Count center of Slider again
@@ -42,15 +35,15 @@ export const CatSlider: FC = () => {
 
     return (
         <SliderContainer>
-            <ImgContainer ref={divRef} onWheel={(e) => wheelHandler(e, width)} onScroll={(e) => scrollHandle(e)} >
-                <SliderItem imgSrc={oneImg} windowWidth={screenWidth} currentCenter={currentCenter} />
-                <SliderItem imgSrc={twoImg} windowWidth={screenWidth} currentCenter={currentCenter} />
-                <SliderItem imgSrc={threeImg} windowWidth={screenWidth} currentCenter={currentCenter} />
-                <SliderItem imgSrc={fourImg} windowWidth={screenWidth} currentCenter={currentCenter} />
-                <SliderItem imgSrc={fiveImg} windowWidth={screenWidth} currentCenter={currentCenter} />
-                <SliderItem imgSrc={sixImg} windowWidth={screenWidth} currentCenter={currentCenter} />
-                <SliderItem imgSrc={sevenImg} windowWidth={screenWidth} currentCenter={currentCenter} />
-                <SliderItem imgSrc={eightImg} windowWidth={screenWidth} currentCenter={currentCenter} />
+            <ImgContainer ref={divRef} onWheel={(e) => wheelHandler(e, screenWidth)} onScroll={(e) => scrollHandle(e)} >
+                <SliderItem imgSource={oneImg} windowWidth={screenWidth} currentCenter={currentCenter} />
+                <SliderItem imgSource={twoImg} windowWidth={screenWidth} currentCenter={currentCenter} />
+                <SliderItem imgSource={threeImg} windowWidth={screenWidth} currentCenter={currentCenter} />
+                <SliderItem imgSource={fourImg} windowWidth={screenWidth} currentCenter={currentCenter} />
+                <SliderItem imgSource={fiveImg} windowWidth={screenWidth} currentCenter={currentCenter} />
+                <SliderItem imgSource={sixImg} windowWidth={screenWidth} currentCenter={currentCenter} />
+                <SliderItem imgSource={sevenImg} windowWidth={screenWidth} currentCenter={currentCenter} />
+                <SliderItem imgSource={eightImg} windowWidth={screenWidth} currentCenter={currentCenter} />
             </ImgContainer>
         </SliderContainer>
     )

@@ -1,41 +1,40 @@
-import { FC, useLayoutEffect, useRef, useState } from "react";
+import { FC, ReactElement, useLayoutEffect, useRef, useState } from "react";
 import styled from 'styled-components';
 
 interface SliderImageProps {
-    mymy: number
+    imageScale: number
 }
 
-export interface SliderItemProps {
-    imgSrc: string,
-    windowWidth: number,
-    currentCenter: number
+interface SliderItemProps {
+    imgSource: string,
+    windowWidth: number, // Width of device display
+    currentCenter: number // Center of the slider coordinate (X)
 }
 
-const maxHeightPercent = 100
+const maxHeightPercent = 100;
 
-export const SliderItem = ({ imgSrc, windowWidth, currentCenter }: SliderItemProps) => {
+export const SliderItem: FC<SliderItemProps> = ({ imgSource, windowWidth, currentCenter }): ReactElement => {
 
     const imgRef = useRef<HTMLImageElement>(null);
     const [imageHeight, setImageHeight] = useState(1);
 
     useLayoutEffect(() => {
         if (imgRef.current) {
-            // let imgPosition = imgRef.current.offsetLeft;
+            // When center of screen changed - count newimage scale 
             let imgPosition = imgRef.current.offsetLeft + (imgRef.current.width / 2);
             let newImageHeight = (-(((imgPosition - currentCenter) ** 2) / (((windowWidth / 2) / 8) ** 2)) + maxHeightPercent) / 100
             if (newImageHeight > 0) {
                 setImageHeight(newImageHeight);
-                console.log(newImageHeight)
             } else
-                setImageHeight(0) // If img size should be lower than 0% then smooth size change
+                setImageHeight(0) // If img scale should be lower than 0 then set scale to 0 (just in case)
         }
-    }, [currentCenter, imageHeight]);
+    }, [currentCenter]);
 
-    return <SliderImage ref={imgRef} src={imgSrc} mymy={imageHeight} />
+    return <SliderImage ref={imgRef} src={imgSource} imageScale={imageHeight} />
 }
 
 const SliderImage = styled.img<SliderImageProps>`
     alt: "";
-    transform: scale(${props => props.mymy});
+    transform: scale(${props => props.imageScale});
     height: 100%;
 `

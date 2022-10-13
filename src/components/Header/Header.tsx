@@ -1,9 +1,9 @@
-import { FC } from "react";
+import { FC, ReactElement } from "react";
 import styled from 'styled-components';
 import mainLogo from '../../assets/icons/neko-heaven-logo.svg';
 import searchIcon from '../../assets/icons/search-icon.svg';
 
-export const Header: FC = () => {
+export const Header: FC = (): ReactElement => {
     return (
         <HeaderContainer>
             <LogoMenuContainer>
