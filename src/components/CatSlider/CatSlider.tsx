@@ -1,14 +1,6 @@
 import { useRef, useState, FC, ReactElement } from "react";
 import styled from 'styled-components';
 import { SliderItem } from "./SliderItem"
-import oneImg from '../../assets/images/1.png';
-import twoImg from '../../assets/images/2.png';
-import threeImg from '../../assets/images/3.png';
-import fourImg from '../../assets/images/4.png';
-import fiveImg from '../../assets/images/5.png';
-import sixImg from '../../assets/images/6.png';
-import sevenImg from '../../assets/images/7.png';
-import eightImg from '../../assets/images/8.png';
 
 const scrollSpeedMultiplier = 0.4;
 const screenWidth = window.innerWidth
@@ -36,14 +28,7 @@ export const CatSlider: FC = (): ReactElement => {
     return (
         <SliderContainer>
             <ImgContainer ref={divRef} onWheel={(e) => wheelHandler(e, screenWidth)} onScroll={(e) => scrollHandle(e)} >
-                <SliderItem imgSource={oneImg} windowWidth={screenWidth} currentCenter={currentCenter} />
-                <SliderItem imgSource={twoImg} windowWidth={screenWidth} currentCenter={currentCenter} />
-                <SliderItem imgSource={threeImg} windowWidth={screenWidth} currentCenter={currentCenter} />
-                <SliderItem imgSource={fourImg} windowWidth={screenWidth} currentCenter={currentCenter} />
-                <SliderItem imgSource={fiveImg} windowWidth={screenWidth} currentCenter={currentCenter} />
-                <SliderItem imgSource={sixImg} windowWidth={screenWidth} currentCenter={currentCenter} />
-                <SliderItem imgSource={sevenImg} windowWidth={screenWidth} currentCenter={currentCenter} />
-                <SliderItem imgSource={eightImg} windowWidth={screenWidth} currentCenter={currentCenter} />
+                <SliderItem windowWidth={screenWidth} currentCenter={currentCenter} />
             </ImgContainer>
         </SliderContainer>
     )
