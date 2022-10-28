@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import mainLogo from '../../assets/icons/neko-heaven-logo.svg';
 import searchIcon from '../../assets/icons/search-icon.svg';
 
-export const Header: FC = (): ReactElement => {
+export const Header = () => {
     return (
         <HeaderContainer>
             <LogoMenuContainer>

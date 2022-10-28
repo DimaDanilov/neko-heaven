@@ -3,18 +3,18 @@ import styled from 'styled-components';
 import { CatImage, getCatImage } from "../../api/CatImagesApi";
 import defaultImage from '../../assets/images/stock-image.png';
 
-interface SliderImageProps {
+interface ISliderImageProps {
     imageScale: number
 }
 
-interface SliderItemProps {
+interface ISliderItemProps {
     windowWidth: number, // Width of device display
     currentCenter: number // Center of the slider coordinate (X)
 }
 
 const maxHeightPercent = 100;
 
-export const SliderItem: FC<SliderItemProps> = ({ windowWidth, currentCenter }): ReactElement => {
+export const SliderItem = ({ windowWidth, currentCenter }: ISliderItemProps) => {
 
     const imgRef = useRef<HTMLImageElement>(null);
     const [isCatImageLoadingStarted, setIsCatImageLoadingStarted] = useState(false) // If cat image started loading from the server
@@ -43,7 +43,7 @@ export const SliderItem: FC<SliderItemProps> = ({ windowWidth, currentCenter }):
     return <SliderImage ref={imgRef} src={catImageInfo === undefined ? defaultImage : catImageInfo.url} imageScale={imageHeight} />
 }
 
-const SliderImage = styled.img<SliderImageProps>`
+const SliderImage = styled.img<ISliderImageProps>`
     alt: "";
     transform: scale(${props => props.imageScale});
     height: 100%;

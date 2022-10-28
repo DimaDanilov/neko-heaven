@@ -1,27 +1,27 @@
-import { useRef, useState, FC, ReactElement, useCallback } from "react";
+import { useRef, useState, ReactElement, useCallback } from "react";
 import styled from 'styled-components';
 import { SliderItem } from "./SliderItem"
 
-const scrollSpeedMultiplier = 0.4;
-const screenWidth = window.innerWidth
+const scrollSpeedMultiplier = 6;
+const screenWidth = window.innerWidth;
 
-export const CatSlider = (): ReactElement => {
+export const CatSlider = () => {
     const divRef = useRef<HTMLDivElement>(null);
     const [currentCenter, setCurrentCenter] = useState(screenWidth / 2)
 
     const wheelHandler = useCallback((e: React.WheelEvent<HTMLDivElement>) => {
         if (divRef.current) {
-            if (e.deltaX > 0) {
+            if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) { // Made cause of difference between touchpad and wheel
                 divRef.current.scrollLeft += e.deltaX * scrollSpeedMultiplier
             }
             else {
-                divRef.current.scrollLeft -= e.deltaX * scrollSpeedMultiplier
+                divRef.current.scrollLeft += e.deltaY * scrollSpeedMultiplier
             }
         }
     }, [])
 
     // Change of center of the scroll
-    const scrollHandle = useCallback((e: React.UIEvent<HTMLDivElement>) => {
+    const scrollHandle = useCallback(() => {
         if (divRef.current) {
             setCurrentCenter(divRef.current.scrollLeft + screenWidth / 2) // Count center of Slider again
         }
