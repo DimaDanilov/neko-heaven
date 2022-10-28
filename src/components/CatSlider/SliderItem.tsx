@@ -1,8 +1,7 @@
 import { FC, ReactElement, useEffect, useLayoutEffect, useRef, useState } from "react";
 import styled from 'styled-components';
-import { CatImage, getCatImage } from "../../api/cat-images";
+import { CatImage, getCatImage } from "../../api/CatImagesApi";
 import defaultImage from '../../assets/images/stock-image.png';
-
 
 interface SliderImageProps {
     imageScale: number
@@ -33,6 +32,7 @@ export const SliderItem: FC<SliderItemProps> = ({ windowWidth, currentCenter }):
                 setImageHeight(0) // If img scale should be lower than 0 then set scale to 0 (just in case)
         }
     }, [currentCenter, windowWidth]);
+
     useEffect(() => {
         if (!isCatImageLoadingStarted) {
             setIsCatImageLoadingStarted(true);

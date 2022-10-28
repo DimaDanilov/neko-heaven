@@ -1,33 +1,40 @@
-import { useRef, useState, FC, ReactElement } from "react";
+import { useRef, useState, FC, ReactElement, useCallback } from "react";
 import styled from 'styled-components';
 import { SliderItem } from "./SliderItem"
 
 const scrollSpeedMultiplier = 0.4;
 const screenWidth = window.innerWidth
 
-export const CatSlider: FC = (): ReactElement => {
+export const CatSlider = (): ReactElement => {
     const divRef = useRef<HTMLDivElement>(null);
     const [currentCenter, setCurrentCenter] = useState(screenWidth / 2)
 
-    // Scrolling event
-    const wheelHandler = (e: React.WheelEvent<HTMLDivElement>, screenWidth: number) => {
+    const wheelHandler = useCallback((e: React.WheelEvent<HTMLDivElement>) => {
         if (divRef.current) {
-            if (e.deltaY > 0)
-                divRef.current.scrollLeft += screenWidth * scrollSpeedMultiplier
-            else
-                divRef.current.scrollLeft -= screenWidth * scrollSpeedMultiplier
+            if (e.deltaX > 0) {
+                divRef.current.scrollLeft += e.deltaX * scrollSpeedMultiplier
+            }
+            else {
+                divRef.current.scrollLeft -= e.deltaX * scrollSpeedMultiplier
+            }
         }
-    }
+    }, [])
 
     // Change of center of the scroll
-    const scrollHandle = (e: React.UIEvent<HTMLDivElement>) => {
-        if (divRef.current)
+    const scrollHandle = useCallback((e: React.UIEvent<HTMLDivElement>) => {
+        if (divRef.current) {
             setCurrentCenter(divRef.current.scrollLeft + screenWidth / 2) // Count center of Slider again
-    }
+        }
+    }, [])
 
     return (
         <SliderContainer>
-            <ImgContainer ref={divRef} onWheel={(e) => wheelHandler(e, screenWidth)} onScroll={(e) => scrollHandle(e)} >
+            <ImgContainer ref={divRef} onWheel={wheelHandler} onScroll={scrollHandle} >
+                <SliderItem windowWidth={screenWidth} currentCenter={currentCenter} />
+                <SliderItem windowWidth={screenWidth} currentCenter={currentCenter} />
+                <SliderItem windowWidth={screenWidth} currentCenter={currentCenter} />
+                <SliderItem windowWidth={screenWidth} currentCenter={currentCenter} />
+                <SliderItem windowWidth={screenWidth} currentCenter={currentCenter} />
                 <SliderItem windowWidth={screenWidth} currentCenter={currentCenter} />
             </ImgContainer>
         </SliderContainer>
