@@ -1,15 +1,16 @@
-import { useRef, useState, useCallback } from "react";
+import { useRef, useCallback, useEffect } from "react";
 import styled from 'styled-components';
 import CatImagesStore from "../../store/CatImagesStore";
+import WindowStore from "../../store/WindowStore";
 import { SliderImages } from "./SliderImages/SliderImages";
+import { observer } from "mobx-react-lite";
 
 
 const scrollSpeedMultiplier = 6;
 const screenWidth = window.innerWidth;
 
-export const Slider = () => {
+export const Slider = observer(() => {
     const divRef = useRef<HTMLDivElement>(null);
-    const [currentCenter, setCurrentCenter] = useState(screenWidth / 2)
 
     const wheelHandler = useCallback((e: React.WheelEvent<HTMLDivElement>) => {
         if (divRef.current) {
@@ -22,6 +23,12 @@ export const Slider = () => {
         }
     }, [])
 
+    // First Initialization
+    useEffect(() => {
+        WindowStore.setScreenWidth(screenWidth)
+        WindowStore.setSliderCenter(0)
+    }, [])
+
     // Loading new images on button click (UPGRADE FEATURE LATER)
     const loadNewImages = () => {
         CatImagesStore.fetchImages(6);
@@ -30,19 +37,19 @@ export const Slider = () => {
     // Change of center of the scroll
     const scrollHandle = useCallback(() => {
         if (divRef.current) {
-            setCurrentCenter(divRef.current.scrollLeft + screenWidth / 2) // Count center of Slider again
+            WindowStore.setSliderCenter(divRef.current.scrollLeft) // Count center of Slider again
         }
     }, [])
 
     return (
         <SliderContainer>
             <ImgContainer ref={divRef} onWheel={wheelHandler} onScroll={scrollHandle} >
-                <SliderImages windowWidth={screenWidth} currentCenter={currentCenter} />
+                <SliderImages />
             </ImgContainer>
             <button onClick={loadNewImages}>LOAD NEW IMAGES</button>
         </SliderContainer>
     )
-};
+});
 
 const SliderContainer = styled.section`
     height: calc(100vh - 50px);

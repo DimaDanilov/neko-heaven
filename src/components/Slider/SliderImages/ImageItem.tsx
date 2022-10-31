@@ -2,12 +2,12 @@ import { useLayoutEffect, useRef, useState } from "react";
 import styled from 'styled-components';
 import defaultImage from '../../../assets/images/stock-image.svg';
 import { CatImage } from "../../../store/CatImagesStore";
+import WindowStore from "../../../store/WindowStore";
+import { observer } from "mobx-react-lite";
 
 
 interface IImageItemProps {
     catImageInfo: CatImage,
-    windowWidth: number, // Width of device display
-    currentCenter: number // Center of the slider coordinate (X)
 }
 
 interface IImageProps {
@@ -16,7 +16,10 @@ interface IImageProps {
 
 const maxHeightPercent = 100;
 
-export const ImageItem = ({ catImageInfo, windowWidth, currentCenter }: IImageItemProps) => {
+export const ImageItem = observer(({ catImageInfo }: IImageItemProps) => {
+
+    const windowWidth = WindowStore.screenWidth
+    const currentCenter = WindowStore.sliderCenter
 
     const imgRef = useRef<HTMLImageElement>(null);
     const [imageHeight, setImageHeight] = useState(1);
@@ -34,7 +37,7 @@ export const ImageItem = ({ catImageInfo, windowWidth, currentCenter }: IImageIt
     }, [currentCenter, windowWidth]);
 
     return <SliderImage ref={imgRef} src={catImageInfo === undefined ? defaultImage : catImageInfo.url} imageScale={imageHeight} />
-}
+})
 
 const SliderImage = styled.img<IImageProps>`
     alt: "";

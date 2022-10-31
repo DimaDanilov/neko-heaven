@@ -23,7 +23,7 @@ class CatImagesStore {
         fetch(`https://nekos.best/api/v2/neko?amount=${amount}`)
             .then((response) => response.json())
             .then((json: CatImageArray) => {
-                this.imagesArray = [...this.imagesArray, ...json.results]
+                this.imagesArray.push(...json.results)
             });
     }
 }
