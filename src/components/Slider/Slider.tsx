@@ -1,11 +1,13 @@
 import { useRef, useState, useCallback } from "react";
 import styled from 'styled-components';
-import { SliderItem } from "./SliderItem"
+import CatImagesStore from "../../store/CatImagesStore";
+import { SliderImages } from "./SliderImages/SliderImages";
+
 
 const scrollSpeedMultiplier = 6;
 const screenWidth = window.innerWidth;
 
-export const CatSlider = () => {
+export const Slider = () => {
     const divRef = useRef<HTMLDivElement>(null);
     const [currentCenter, setCurrentCenter] = useState(screenWidth / 2)
 
@@ -20,6 +22,11 @@ export const CatSlider = () => {
         }
     }, [])
 
+    // Loading new images on button click (UPGRADE FEATURE LATER)
+    const loadNewImages = () => {
+        CatImagesStore.fetchImages(6);
+    }
+
     // Change of center of the scroll
     const scrollHandle = useCallback(() => {
         if (divRef.current) {
@@ -30,13 +37,9 @@ export const CatSlider = () => {
     return (
         <SliderContainer>
             <ImgContainer ref={divRef} onWheel={wheelHandler} onScroll={scrollHandle} >
-                <SliderItem windowWidth={screenWidth} currentCenter={currentCenter} />
-                <SliderItem windowWidth={screenWidth} currentCenter={currentCenter} />
-                <SliderItem windowWidth={screenWidth} currentCenter={currentCenter} />
-                <SliderItem windowWidth={screenWidth} currentCenter={currentCenter} />
-                <SliderItem windowWidth={screenWidth} currentCenter={currentCenter} />
-                <SliderItem windowWidth={screenWidth} currentCenter={currentCenter} />
+                <SliderImages windowWidth={screenWidth} currentCenter={currentCenter} />
             </ImgContainer>
+            <button onClick={loadNewImages}>LOAD NEW IMAGES</button>
         </SliderContainer>
     )
 };

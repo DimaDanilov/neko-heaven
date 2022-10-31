@@ -1,24 +1,24 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import styled from 'styled-components';
-import { CatImage, getCatImage } from "../../api/CatImagesApi";
-import defaultImage from '../../assets/images/stock-image.svg';
+import defaultImage from '../../../assets/images/stock-image.svg';
+import { CatImage } from "../../../store/CatImagesStore";
 
-interface ISliderImageProps {
-    imageScale: number
-}
 
-interface ISliderItemProps {
+interface IImageItemProps {
+    catImageInfo: CatImage,
     windowWidth: number, // Width of device display
     currentCenter: number // Center of the slider coordinate (X)
 }
 
+interface IImageProps {
+    imageScale: number
+}
+
 const maxHeightPercent = 100;
 
-export const SliderItem = ({ windowWidth, currentCenter }: ISliderItemProps) => {
+export const ImageItem = ({ catImageInfo, windowWidth, currentCenter }: IImageItemProps) => {
 
     const imgRef = useRef<HTMLImageElement>(null);
-    const [isCatImageLoadingStarted, setIsCatImageLoadingStarted] = useState(false) // If cat image started loading from the server
-    const [catImageInfo, setCatImageInfo] = useState<CatImage | undefined>(undefined) // Cat image info (artist, url, etc.)
     const [imageHeight, setImageHeight] = useState(1);
 
     useLayoutEffect(() => {
@@ -33,17 +33,10 @@ export const SliderItem = ({ windowWidth, currentCenter }: ISliderItemProps) => 
         }
     }, [currentCenter, windowWidth]);
 
-    useEffect(() => {
-        if (!isCatImageLoadingStarted) {
-            setIsCatImageLoadingStarted(true);
-            (async () => setCatImageInfo(await getCatImage()))();
-        }
-    }, [isCatImageLoadingStarted])
-
     return <SliderImage ref={imgRef} src={catImageInfo === undefined ? defaultImage : catImageInfo.url} imageScale={imageHeight} />
 }
 
-const SliderImage = styled.img<ISliderImageProps>`
+const SliderImage = styled.img<IImageProps>`
     alt: "";
     transform: scale(${props => props.imageScale});
     height: 100%;

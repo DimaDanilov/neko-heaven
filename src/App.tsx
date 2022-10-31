@@ -1,12 +1,12 @@
 import './App.css';
 import { Header } from './components/Header/Header';
-import { CatSlider } from './components/CatSlider/CatSlider';
+import { Slider } from './components/Slider/Slider';
 
 function App() {
   return (
     <>
       <Header />
-      <CatSlider />
+      <Slider />
     </>
   );
 }
