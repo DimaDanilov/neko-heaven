@@ -1,7 +1,7 @@
-import { FC, ReactElement, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import styled from 'styled-components';
 import { CatImage, getCatImage } from "../../api/CatImagesApi";
-import defaultImage from '../../assets/images/stock-image.png';
+import defaultImage from '../../assets/images/stock-image.svg';
 
 interface ISliderImageProps {
     imageScale: number

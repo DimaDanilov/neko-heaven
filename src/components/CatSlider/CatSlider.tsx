@@ -1,4 +1,4 @@
-import { useRef, useState, ReactElement, useCallback } from "react";
+import { useRef, useState, useCallback } from "react";
 import styled from 'styled-components';
 import { SliderItem } from "./SliderItem"
 
