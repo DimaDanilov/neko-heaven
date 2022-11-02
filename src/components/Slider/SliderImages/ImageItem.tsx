@@ -7,8 +7,7 @@ import { observer } from "mobx-react-lite";
 
 
 interface IImageItemProps {
-    imageId: number,
-    catImageInfo: CatImage,
+    catImageInfo: CatImage
 }
 
 interface IImageProps {
@@ -18,11 +17,11 @@ interface IImageProps {
 const maxHeightPercent = 100;
 
 
-export const ImageItem = observer(({ imageId, catImageInfo }: IImageItemProps) => {
+export const ImageItem = observer(({ catImageInfo }: IImageItemProps) => {
     const startNextImageLoading = () => {
         // When this image is loaded, change variable to load the next image source
-        if (imageId === CatImagesStore.currentImageLoading)
-            CatImagesStore.currentImageLoading = imageId + 1
+        if (catImageInfo.id === CatImagesStore.currentImageLoading)
+            CatImagesStore.currentImageLoading++
     }
 
     const windowWidth = WindowStore.screenWidth
@@ -46,7 +45,7 @@ export const ImageItem = observer(({ imageId, catImageInfo }: IImageItemProps) =
     return <SliderImage
         ref={imgRef}
         onLoad={startNextImageLoading}
-        src={(catImageInfo === undefined) || (imageId > CatImagesStore.currentImageLoading)
+        src={(catImageInfo === undefined) || (catImageInfo.id > CatImagesStore.currentImageLoading)
             ? defaultImage
             : catImageInfo.url}
         imageScale={imageHeight}
