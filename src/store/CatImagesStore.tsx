@@ -13,6 +13,7 @@ export interface CatImageArray {
 
 class CatImagesStore {
     imagesArray: CatImage[] = [];
+    currentImageLoading = 0;
 
     constructor() {
         makeAutoObservable(this)
