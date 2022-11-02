@@ -15,9 +15,9 @@ export interface CatImageArray {
     results: CatImageResponse[];
 };
 
-class CatImagesStore {
-    imagesArray: CatImage[] = [];
-    currentImageLoading = 0;
+class CatStore {
+    imgsArray: CatImage[] = [];
+    imgLoadingID = 0; // ID of image that is loading right now (or last when no images left to load)
 
     constructor() {
         makeAutoObservable(this)
@@ -28,9 +28,9 @@ class CatImagesStore {
         fetch(`https://nekos.best/api/v2/neko?amount=${amount}`)
             .then((response) => response.json())
             .then((json: CatImageArray) => {
-                this.imagesArray.push(...json.results.map((cat, index) => {
+                this.imgsArray.push(...json.results.map((cat, index) => {
                     return {
-                        id: this.imagesArray.length + index,
+                        id: this.imgsArray.length + index,
                         ...cat
                     }
                 }))
@@ -38,4 +38,4 @@ class CatImagesStore {
     }
 }
 
-export default new CatImagesStore();
+export default new CatStore();

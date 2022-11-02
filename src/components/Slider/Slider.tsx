@@ -1,6 +1,6 @@
 import { useRef, useCallback, useEffect } from "react";
 import styled from 'styled-components';
-import CatImagesStore from "../../store/CatImagesStore";
+import CatStore from "../../store/CatStore";
 import WindowStore from "../../store/WindowStore";
 import { SliderImages } from "./SliderImages/SliderImages";
 import { observer } from "mobx-react-lite";
@@ -31,7 +31,7 @@ export const Slider = observer(() => {
 
     // Loading new images on button click (UPGRADE FEATURE LATER)
     const loadNewImages = () => {
-        CatImagesStore.fetchImages(6);
+        CatStore.fetchImages(6);
     }
 
     // Change of center of the scroll

@@ -1,11 +1,11 @@
 import { observer } from "mobx-react-lite";
-import CatImagesStore from "../../../store/CatImagesStore";
+import CatStore from "../../../store/CatStore";
 import { ImageItem } from "./ImageItem";
 
 export const SliderImages = observer(() => {
-    let catsArray = CatImagesStore.imagesArray
-    let cats = catsArray.map((cat) =>
-        <ImageItem key={cat.id} catImageInfo={cat} />
+    let catsArray = CatStore.imgsArray
+    let catsItems = catsArray.map((cat) =>
+        <ImageItem key={cat.id} cat={cat} />
     )
-    return <>{cats}</>
+    return <>{catsItems}</>
 })

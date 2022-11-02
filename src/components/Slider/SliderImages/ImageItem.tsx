@@ -1,13 +1,13 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import styled from 'styled-components';
 import defaultImage from '../../../assets/images/stock-image.svg';
-import CatImagesStore, { CatImage } from "../../../store/CatImagesStore";
+import CatStore, { CatImage } from "../../../store/CatStore";
 import WindowStore from "../../../store/WindowStore";
 import { observer } from "mobx-react-lite";
 
 
 interface IImageItemProps {
-    catImageInfo: CatImage
+    cat: CatImage
 }
 
 interface IImageProps {
@@ -17,11 +17,11 @@ interface IImageProps {
 const maxHeightPercent = 100;
 
 
-export const ImageItem = observer(({ catImageInfo }: IImageItemProps) => {
+export const ImageItem = observer(({ cat }: IImageItemProps) => {
     const startNextImageLoading = () => {
         // When this image is loaded, change variable to load the next image source
-        if (catImageInfo.id === CatImagesStore.currentImageLoading)
-            CatImagesStore.currentImageLoading++
+        if (cat.id === CatStore.imgLoadingID)
+            CatStore.imgLoadingID++
     }
 
     const windowWidth = WindowStore.screenWidth
@@ -45,9 +45,9 @@ export const ImageItem = observer(({ catImageInfo }: IImageItemProps) => {
     return <SliderImage
         ref={imgRef}
         onLoad={startNextImageLoading}
-        src={(catImageInfo === undefined) || (catImageInfo.id > CatImagesStore.currentImageLoading)
+        src={(cat === undefined) || (cat.id > CatStore.imgLoadingID)
             ? defaultImage
-            : catImageInfo.url}
+            : cat.url}
         imageScale={imageHeight}
     />
 })
