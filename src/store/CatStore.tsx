@@ -1,22 +1,22 @@
 import { makeAutoObservable } from "mobx";
 
-export interface CatImageResponse {
+export interface ICatImageResponse {
     artist_href: string,
     artist_name: string,
     source_url: string,
     url: string
 }
 
-export interface CatImage extends CatImageResponse {
+export interface ICatImage extends ICatImageResponse {
     id: number,
 }
 
-export interface CatImageArray {
-    results: CatImageResponse[];
+export interface ICatImageArray {
+    results: ICatImageResponse[];
 };
 
 class CatStore {
-    imgsArray: CatImage[] = [];
+    imgsArray: ICatImage[] = [];
     imgLoadingID = 0; // ID of image that is loading right now (or last when no images left to load)
 
     constructor() {
@@ -27,7 +27,7 @@ class CatStore {
     fetchImages(amount: number) {
         fetch(`https://nekos.best/api/v2/neko?amount=${amount}`)
             .then((response) => response.json())
-            .then((json: CatImageArray) => {
+            .then((json: ICatImageArray) => {
                 this.imgsArray.push(...json.results.map((cat, index) => {
                     return {
                         id: this.imgsArray.length + index,

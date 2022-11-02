@@ -1,13 +1,13 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import styled from 'styled-components';
 import defaultImage from '../../../assets/images/stock-image.svg';
-import CatStore, { CatImage } from "../../../store/CatStore";
+import CatStore, { ICatImage } from "../../../store/CatStore";
 import WindowStore from "../../../store/WindowStore";
 import { observer } from "mobx-react-lite";
 
 
 interface IImageItemProps {
-    cat: CatImage
+    cat: ICatImage
 }
 
 interface IImageProps {
