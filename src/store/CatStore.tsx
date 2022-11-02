@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 export interface ICatImageResponse {
     artist_href: string,
@@ -28,14 +28,19 @@ class CatStore {
         fetch(`https://nekos.best/api/v2/neko?amount=${amount}`)
             .then((response) => response.json())
             .then((json: ICatImageArray) => {
-                this.imgsArray.push(...json.results.map((cat, index) => {
-                    return {
-                        id: this.imgsArray.length + index,
-                        ...cat
-                    }
-                }))
+                runInAction(() => {
+                    this.imgsArray.push(...json.results.map((cat, index) => {
+                        return {
+                            id: this.imgsArray.length + index,
+                            ...cat
+                        }
+                    }))
+                })
             });
     }
+
+    incrementImgLoadingID = () => this.imgLoadingID++
+    decrementImgLoadingID = () => this.imgLoadingID--
 }
 
 export default new CatStore();
