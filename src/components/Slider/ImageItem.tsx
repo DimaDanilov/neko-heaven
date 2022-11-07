@@ -1,45 +1,45 @@
 import { useLayoutEffect, useRef } from "react";
 import styled from 'styled-components';
-import defaultImage from '../../../assets/images/stock-image.svg';
-import CatStore, { ICatImage } from "../../../store/CatStore";
-import WindowStore from "../../../store/WindowStore";
+import defaultImage from '../../assets/images/stock-image.svg';
+import { useCatStore } from "../../store/CatStore";
 import { observer } from "mobx-react-lite";
-
+import { IImageItem } from "../../models/Cat";
 
 interface IImageItemProps {
-    cat: ICatImage
+    cat: IImageItem
 }
 
 interface IImageProps {
     imageScale: number
 }
 
-const onLoadHandler = (catID: number) => {
-    // When this image is loaded, change variable to load the next image source
-    if (catID === CatStore.imgLoadingID)
-        CatStore.incrementImgLoadingID()
-}
-
 export const ImageItem = observer(({ cat }: IImageItemProps) => {
-
+    const catStore = useCatStore()
     const imgRef = useRef<HTMLImageElement>(null);
     const offsetLeft = imgRef.current ? imgRef.current.offsetLeft : 0
+
+    const onLoadHandler = (catID: number) => {
+        // When this image is loaded, change variable to load the next image source
+        if (catID === catStore.imgLoadingID) {
+            catStore.incrementImgLoadingID()
+        }
+    }
 
     useLayoutEffect(() => {
         if (imgRef.current) {
             let imgPosition = imgRef.current.offsetLeft + (imgRef.current.width / 2);
-            WindowStore.setPositionOfImage(cat.id, imgPosition);
-            WindowStore.countHeightForID(cat.id);
+            catStore.setPositionOfImage(cat.id, imgPosition);
+            catStore.countScaleOfImage(cat.id);
         }
     }, [offsetLeft, cat.id]);
 
     return <SliderImage
         ref={imgRef}
         onLoad={() => onLoadHandler(cat.id)}
-        src={(cat === undefined) || (cat.id > CatStore.imgLoadingID)
+        src={(cat === undefined) || (cat.id > catStore.imgLoadingID)
             ? defaultImage
-            : cat.url}
-        imageScale={WindowStore.imgsHeightArray[cat.id]}
+            : cat.catInfo.url}
+        imageScale={cat.scale}
     />
 })
 

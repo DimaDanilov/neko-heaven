@@ -1,15 +1,17 @@
-import { useRef, useCallback, useEffect } from "react";
+import { useRef, useCallback, useEffect, useLayoutEffect } from "react";
 import styled from 'styled-components';
-import CatStore from "../../store/CatStore";
-import WindowStore from "../../store/WindowStore";
-import { SliderImages } from "./SliderImages/SliderImages";
+import { useCatStore } from "../../store/CatStore";
+import { useWindowStore } from "../../store/WindowStore";
 import { observer } from "mobx-react-lite";
-
+import { ImageItem } from "./ImageItem";
 
 const scrollSpeedMultiplier = 6;
 const screenWidth = window.innerWidth;
 
 export const Slider = observer(() => {
+    const catStore = useCatStore();
+    const windowStore = useWindowStore();
+
     const divRef = useRef<HTMLDivElement>(null);
 
     const wheelHandler = useCallback((e: React.WheelEvent<HTMLDivElement>) => {
@@ -25,26 +27,29 @@ export const Slider = observer(() => {
 
     // First Initialization
     useEffect(() => {
-        WindowStore.setScreenWidth(screenWidth)
-        WindowStore.setSliderCenter(0)
+        windowStore.setScreenWidth(screenWidth)
+        windowStore.setSliderCenter(0)
     }, [])
 
     // Loading new images on button click (UPGRADE FEATURE LATER)
-    const loadNewImages = () => {
-        CatStore.fetchImages(6);
+    const loadNewImages = async () => {
+        await catStore.fetchImages(6);
     }
 
     // Change of center of the scroll
     const scrollHandle = useCallback(() => {
         if (divRef.current) {
-            WindowStore.setSliderCenter(divRef.current.scrollLeft) // Count center of Slider again
+            windowStore.setSliderCenter(divRef.current.scrollLeft) // Count center of Slider again
         }
     }, [])
 
     return (
         <SliderContainer>
             <ImgContainer ref={divRef} onWheel={wheelHandler} onScroll={scrollHandle} >
-                <SliderImages />
+                {/* All cat images */}
+                {catStore.imgsArray.map((cat, index) =>
+                    <ImageItem key={cat.catInfo.url + index} cat={cat} />
+                )}
             </ImgContainer>
             <button onClick={loadNewImages}>LOAD NEW IMAGES</button>
         </SliderContainer>
