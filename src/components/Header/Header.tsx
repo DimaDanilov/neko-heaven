@@ -1,8 +1,25 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import mainLogo from '../../assets/icons/neko-heaven-logo.svg';
 import searchIcon from '../../assets/icons/search-icon.svg';
+import { DropDownMenu } from './DropDownMenu';
+
+interface IMenuLinkProps {
+    pinStatus?: boolean
+}
 
 export const Header = () => {
+    const [isDropdownPinned, setIsDropdownPinned] = useState(false); // Pin for dropdown menu (you can show your dropdown menu even if you move mouse if you click on parent)
+    const [isDropdownHovered, setIsDropdownHovered] = useState(false);
+
+    const clickHandler = () => {
+        setIsDropdownPinned((pin) => !pin)
+    }
+
+    const hoverHandler = () => {
+        setIsDropdownHovered((hover) => !hover)
+    }
+
     return (
         <HeaderContainer>
             <LogoMenuContainer>
@@ -13,8 +30,9 @@ export const Header = () => {
                     </LogoContainer>
                 </LogoLink>
                 <MenuUl>
-                    <MenuLi>
-                        <MenuLink href="/">Categories</MenuLink>
+                    <MenuLi onMouseEnter={hoverHandler} onMouseLeave={hoverHandler}>
+                        <MenuLink pinStatus={isDropdownPinned} onClick={clickHandler}>Categories</MenuLink>
+                        <DropDownMenu pinStatus={isDropdownPinned} hoverStatus={isDropdownHovered} />
                     </MenuLi>
                     <MenuLi>
                         <MenuLink href="/">GIF</MenuLink>
@@ -22,17 +40,17 @@ export const Header = () => {
                 </MenuUl>
             </LogoMenuContainer>
             <SearchImg src={searchIcon} />
-        </HeaderContainer>
+        </HeaderContainer >
     )
 }
 
 const HeaderContainer = styled.header`
+    position: relative;
     background: linear-gradient(#FFBCD1, #FFB2CA);
     height: 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 4%;
 `
 const LogoMenuContainer = styled.div`
     height: 100%;
@@ -40,6 +58,7 @@ const LogoMenuContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     gap: 30%;
+    margin: 0 4%;
 `
 const LogoContainer = styled.div`
     display: flex;
@@ -57,7 +76,8 @@ const MenuLi = styled.li`
     height: 100%;
     display: flex;
 `
-const MenuLink = styled.a`
+const MenuLink = styled.a<IMenuLinkProps>`
+    cursor: pointer;
     color: white;
     text-decoration: none;
     font-size: 24px;
@@ -67,6 +87,11 @@ const MenuLink = styled.a`
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 0.25s ease-out;
+    background-color: ${props => props.pinStatus === true ? "#f995b4" : ""};
+    &:hover {
+        background-color: #fea4bd;
+    }
 `
 const LogoLink = styled.a`
     height: 100%;
@@ -86,4 +111,5 @@ const MainLogoName = styled.span`
 const SearchImg = styled.img`
     alt: "";
     height: 50%;
+    margin: 0 4%;
 `
