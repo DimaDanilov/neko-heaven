@@ -1,4 +1,4 @@
-import { useRef, useCallback, useEffect, useLayoutEffect } from "react";
+import { useRef, useCallback, useEffect } from "react";
 import styled from 'styled-components';
 import { useCatStore } from "../../store/CatStore";
 import { useWindowStore } from "../../store/WindowStore";
@@ -8,7 +8,11 @@ import { ImageItem } from "./ImageItem";
 const scrollSpeedMultiplier = 6;
 const screenWidth = window.innerWidth;
 
-export const Slider = observer(() => {
+interface ISliderProps {
+    category: string
+}
+
+export const Slider = observer(({ category }: ISliderProps) => {
     const catStore = useCatStore();
     const windowStore = useWindowStore();
 
@@ -33,7 +37,7 @@ export const Slider = observer(() => {
 
     // Loading new images on button click (UPGRADE FEATURE LATER)
     const loadNewImages = async () => {
-        await catStore.fetchImages(6);
+        await catStore.fetchImages(category, 6);
     }
 
     // Change of center of the scroll

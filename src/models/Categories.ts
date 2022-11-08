@@ -1,0 +1,1 @@
+export const PNG_CATEGORIES = ["neko", "husbando", "kitsune", "waifu"]

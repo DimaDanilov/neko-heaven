@@ -1,18 +1,27 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { PNG_CATEGORIES } from '../../models/Categories';
+
 
 interface IDropDownMenuProps {
     pinStatus: boolean
     hoverStatus: boolean
 }
 
+// Make first letter big (word -> Word)
+const capitalizeFirstLetter = (string: string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 export const DropDownMenu = ({ pinStatus, hoverStatus }: IDropDownMenuProps) => {
+    const categoryList = PNG_CATEGORIES.map((category, index) =>
+        <Category key={index} to={"/" + category}>{capitalizeFirstLetter(category)}</Category >
+    )
+
     return (
         <CategoriesContainer pinStatus={pinStatus} hoverStatus={hoverStatus}>
             <CategoriesList>
-                <Category href="#">Neko</Category>
-                <Category href="#">Husbando</Category>
-                <Category href="#">Kitsune</Category>
-                <Category href="#">Waifu</Category>
+                {categoryList}
             </CategoriesList>
         </CategoriesContainer>
     )
@@ -28,7 +37,7 @@ const CategoriesContainer = styled.div<IDropDownMenuProps>`
     left: 0;
     background: linear-gradient(#E184C0, #CE7BB0);
 `
-const Category = styled.a`
+const Category = styled(Link)`
     color: white;
     text-decoration: none;
     font-size: 22px;

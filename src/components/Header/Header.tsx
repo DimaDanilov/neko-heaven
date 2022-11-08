@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import mainLogo from '../../assets/icons/neko-heaven-logo.svg';
 import searchIcon from '../../assets/icons/search-icon.svg';
 import { DropDownMenu } from './DropDownMenu';
+import { Link } from 'react-router-dom';
 
 interface IMenuLinkProps {
-    pinStatus?: boolean
+    pinned: boolean
 }
 
 export const Header = () => {
@@ -23,7 +24,7 @@ export const Header = () => {
     return (
         <HeaderContainer>
             <LogoMenuContainer>
-                <LogoLink href="/">
+                <LogoLink to="/">
                     <LogoContainer>
                         <MainLogoImg src={mainLogo} />
                         <MainLogoName>Neko Heaven</MainLogoName>
@@ -31,11 +32,11 @@ export const Header = () => {
                 </LogoLink>
                 <MenuUl>
                     <MenuLi onMouseEnter={hoverHandler} onMouseLeave={hoverHandler}>
-                        <MenuLink pinStatus={isDropdownPinned} onClick={clickHandler}>Categories</MenuLink>
+                        <MenuLink to="" pinned={isDropdownPinned} onClick={clickHandler}>Categories</MenuLink>
                         <DropDownMenu pinStatus={isDropdownPinned} hoverStatus={isDropdownHovered} />
                     </MenuLi>
                     <MenuLi>
-                        <MenuLink href="/">GIF</MenuLink>
+                        <MenuLink to="" pinned={false}>GIF</MenuLink>
                     </MenuLi>
                 </MenuUl>
             </LogoMenuContainer>
@@ -76,7 +77,7 @@ const MenuLi = styled.li`
     height: 100%;
     display: flex;
 `
-const MenuLink = styled.a<IMenuLinkProps>`
+const MenuLink = styled(Link)<IMenuLinkProps>`
     cursor: pointer;
     color: white;
     text-decoration: none;
@@ -88,12 +89,12 @@ const MenuLink = styled.a<IMenuLinkProps>`
     justify-content: center;
     align-items: center;
     transition: all 0.25s ease-out;
-    background-color: ${props => props.pinStatus === true ? "#f995b4" : ""};
+    background-color: ${props => props.pinned ? "#f995b4" : ""};
     &:hover {
         background-color: #fea4bd;
     }
 `
-const LogoLink = styled.a`
+const LogoLink = styled(Link)`
     height: 100%;
     text-decoration: none;
     vertical-align: center;

@@ -1,4 +1,4 @@
-import { makeAutoObservable, toJS } from "mobx";
+import { makeAutoObservable } from "mobx";
 import React from "react";
 import { ICatImage, IImageItem } from "../models/Cat";
 import { getCats } from "../services/CatRest";
@@ -13,8 +13,8 @@ class CatStore {
     }
 
     // GET new images from API
-    async fetchImages(amount: number) {
-        const data = await getCats(amount)
+    async fetchImages(category: string, amount: number) {
+        const data = await getCats(category, amount)
         this.setImages(data)
     }
 

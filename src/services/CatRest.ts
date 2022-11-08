@@ -5,8 +5,8 @@ export interface ICatImageArray {
     results: ICatImage[]
 }
 
-export const getCats = async (amount: number) => {
-    return fetch(`https://nekos.best/api/v2/neko?amount=${amount}`)
-    .then((response) => response.json())
-    .then((json: ICatImageArray) => CatAdapter.transform(json.results));
+export const getCats = async (category: string, amount: number) => {
+    return fetch(`https://nekos.best/api/v2/${category}?amount=${amount}`)
+        .then((response) => response.json())
+        .then((json: ICatImageArray) => CatAdapter.transform(json.results));
 }
