@@ -29,23 +29,38 @@ export const Slider = observer(({ category }: ISliderProps) => {
         }
     }, [])
 
-    // First Initialization
-    useEffect(() => {
-        windowStore.setScreenWidth(screenWidth)
-        windowStore.setSliderCenter(0)
-    }, [])
-
     // Loading new images on button click (UPGRADE FEATURE LATER)
     const loadNewImages = async () => {
         await catStore.fetchImages(category, 6);
     }
 
+
     // Change of center of the scroll
     const scrollHandle = useCallback(() => {
         if (divRef.current) {
-            windowStore.setSliderCenter(divRef.current.scrollLeft) // Count center of Slider again
+            windowStore.setSliderCenter(divRef.current.scrollLeft); // Count center of Slider again
         }
-    }, [])
+    }, [windowStore])
+
+    // First Initialization
+    useEffect(() => {
+        windowStore.setScreenWidth(screenWidth);
+        windowStore.setSliderCenter(0);
+    }, [windowStore])
+
+    // If link changed then clear an array
+    useEffect(() => {
+        catStore.resetCatArray();
+        catStore.resetImgLoadingID();
+    }, [category, catStore])
+
+    // If slider is empty fill it with images
+    useEffect(() => {
+        if (catStore.imgsArray.length === 0) {
+            loadNewImages();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [catStore.imgsArray.length])
 
     return (
         <SliderContainer>

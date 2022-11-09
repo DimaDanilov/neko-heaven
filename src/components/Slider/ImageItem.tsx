@@ -24,14 +24,14 @@ export const ImageItem = observer(({ cat }: IImageItemProps) => {
             catStore.incrementImgLoadingID()
         }
     }
-
+    
     useLayoutEffect(() => {
         if (imgRef.current) {
             let imgPosition = imgRef.current.offsetLeft + (imgRef.current.width / 2);
             catStore.setPositionOfImage(cat.id, imgPosition);
             catStore.countScaleOfImage(cat.id);
         }
-    }, [offsetLeft, cat.id]);
+    }, [offsetLeft, cat.id, catStore]);
 
     return <SliderImage
         ref={imgRef}

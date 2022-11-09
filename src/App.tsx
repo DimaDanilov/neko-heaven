@@ -13,7 +13,7 @@ function App() {
     <>
       <Routes>
         {categoriesRoutes}
-        <Route path="/" element={<Navigate to={PNG_CATEGORIES[0]} />} />
+        <Route path="*" element={<Navigate to={PNG_CATEGORIES[0]} />} />
       </Routes>
     </>
   );

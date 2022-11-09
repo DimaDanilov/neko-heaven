@@ -32,6 +32,11 @@ class CatStore {
         )
     }
 
+    // Empty image array
+    resetCatArray() {
+        this.imgsArray.length = 0
+    }
+
     // SET position of single image by ID
     setPositionOfImage(id: number, position: number) {
         this.imgsArray[id].position = position;
@@ -39,13 +44,13 @@ class CatStore {
 
     // SET scale of single image by ID
     countScaleOfImage(id: number) {
-        if (((WindowStoreInstance.sliderCenter - WindowStoreInstance.screenWidth / 2) < this.imgsArray[id].position) &&
-            (this.imgsArray[id].position < (WindowStoreInstance.sliderCenter + WindowStoreInstance.screenWidth / 2))) {
+        if (((WindowStoreInstance.sliderCenter - WindowStoreInstance.screenWidth) < this.imgsArray[id].position) &&
+            (this.imgsArray[id].position < (WindowStoreInstance.sliderCenter + WindowStoreInstance.screenWidth))) {
             let newImageHeight = (-(((this.imgsArray[id].position - WindowStoreInstance.sliderCenter) ** 2) / (((WindowStoreInstance.screenWidth / 2) / 8) ** 2)) + 100) / 100;
             if (newImageHeight > 0) {
                 this.imgsArray[id].scale = (Number(newImageHeight.toFixed(2)));
             }
-            else {
+            else if (this.imgsArray[id].scale !== 0) {
                 this.imgsArray[id].scale = 0; // If img scale should be lower than 0 then set scale to 0 (just in case) 
             }
         }
@@ -69,6 +74,11 @@ class CatStore {
     // SET img loading ID to next (to load next image)
     incrementImgLoadingID() {
         this.imgLoadingID++
+    }
+
+    // SET img loading ID to 0
+    resetImgLoadingID() {
+        this.imgLoadingID = 0
     }
 }
 
