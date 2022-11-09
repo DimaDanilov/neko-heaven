@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import mainLogo from '../../assets/icons/neko-heaven-logo.svg';
-import searchIcon from '../../assets/icons/search-icon.svg';
 import { DropDownMenu } from './DropDownMenu';
 import { Link } from 'react-router-dom';
 
@@ -23,24 +22,21 @@ export const Header = () => {
 
     return (
         <HeaderContainer>
-            <LogoMenuContainer>
-                <LogoLink to="/">
-                    <LogoContainer>
-                        <MainLogoImg src={mainLogo} />
-                        <MainLogoName>Neko Heaven</MainLogoName>
-                    </LogoContainer>
-                </LogoLink>
-                <MenuUl>
-                    <MenuLi onMouseEnter={hoverHandler} onMouseLeave={hoverHandler}>
-                        <MenuLink to="" pinned={isDropdownPinned} onClick={clickHandler}>Categories</MenuLink>
-                        <DropDownMenu pinStatus={isDropdownPinned} hoverStatus={isDropdownHovered} />
-                    </MenuLi>
-                    <MenuLi>
-                        <MenuLink to="" pinned={false}>GIF</MenuLink>
-                    </MenuLi>
-                </MenuUl>
-            </LogoMenuContainer>
-            <SearchImg src={searchIcon} />
+            <LogoLink to="/">
+                <LogoContainer>
+                    <MainLogoImg src={mainLogo} />
+                    <MainLogoName>Neko Heaven</MainLogoName>
+                </LogoContainer>
+            </LogoLink>
+            <MenuUl>
+                <MenuLi onMouseEnter={hoverHandler} onMouseLeave={hoverHandler}>
+                    <MenuLink to="" pinned={isDropdownPinned} onClick={clickHandler}>Neko</MenuLink>
+                    <DropDownMenu pinStatus={isDropdownPinned} hoverStatus={isDropdownHovered} />
+                </MenuLi>
+                <MenuLi>
+                    <MenuLink to="" pinned={false}>Waifu</MenuLink>
+                </MenuLi>
+            </MenuUl>
         </HeaderContainer >
     )
 }
@@ -50,16 +46,8 @@ const HeaderContainer = styled.header`
     background: linear-gradient(#FFBCD1, #FFB2CA);
     height: 50px;
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
     align-items: center;
-`
-const LogoMenuContainer = styled.div`
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 30%;
-    margin: 0 4%;
 `
 const LogoContainer = styled.div`
     display: flex;
@@ -69,7 +57,6 @@ const LogoContainer = styled.div`
 `
 const MenuUl = styled.ul`
     display: flex;
-    gap: 15%;
     height: 100%;
 `
 const MenuLi = styled.li`
@@ -77,14 +64,14 @@ const MenuLi = styled.li`
     height: 100%;
     display: flex;
 `
-const MenuLink = styled(Link)<IMenuLinkProps>`
+const MenuLink = styled(Link) <IMenuLinkProps>`
     cursor: pointer;
     color: white;
     text-decoration: none;
     font-size: 24px;
     font-family: "PolyRegular";
     height: 100%;
-    padding: 0 20px;
+    padding: 0 25px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -98,6 +85,7 @@ const LogoLink = styled(Link)`
     height: 100%;
     text-decoration: none;
     vertical-align: center;
+    margin: 0 4%;
 `
 const MainLogoImg = styled.img`
     alt: "";
@@ -108,9 +96,4 @@ const MainLogoName = styled.span`
     white-space: nowrap;
     font-size: 24px;
     font-family: "InterSemiBold";
-`
-const SearchImg = styled.img`
-    alt: "";
-    height: 50%;
-    margin: 0 4%;
 `
