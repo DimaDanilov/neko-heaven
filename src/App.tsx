@@ -5,7 +5,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { PNG_CATEGORIES } from './models/Categories';
 
 const categoriesRoutes = PNG_CATEGORIES.map((category, index) =>
-  <Route key={category + index} path={category} element={<><Header /><Slider category={category} /></>} />
+  <Route key={category + index} path={category} element={<><Header /><Slider /></>} />
 )
 
 function App() {

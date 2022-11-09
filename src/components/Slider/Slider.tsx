@@ -8,11 +8,7 @@ import { ImageItem } from "./ImageItem";
 const scrollSpeedMultiplier = 6;
 const screenWidth = window.innerWidth;
 
-interface ISliderProps {
-    category: string
-}
-
-export const Slider = observer(({ category }: ISliderProps) => {
+export const Slider = observer(() => {
     const catStore = useCatStore();
     const windowStore = useWindowStore();
 
@@ -31,36 +27,22 @@ export const Slider = observer(({ category }: ISliderProps) => {
 
     // Loading new images on button click (UPGRADE FEATURE LATER)
     const loadNewImages = async () => {
-        await catStore.fetchImages(category, 6);
+        await catStore.fetchImages(catStore.currentCategory, 6);
     }
-
 
     // Change of center of the scroll
     const scrollHandle = useCallback(() => {
         if (divRef.current) {
             windowStore.setSliderCenter(divRef.current.scrollLeft); // Count center of Slider again
         }
-    }, [windowStore])
+    }, [])
 
     // First Initialization
     useEffect(() => {
         windowStore.setScreenWidth(screenWidth);
         windowStore.setSliderCenter(0);
-    }, [windowStore])
-
-    // If link changed then clear an array
-    useEffect(() => {
-        catStore.resetCatArray();
-        catStore.resetImgLoadingID();
-    }, [category, catStore])
-
-    // If slider is empty fill it with images
-    useEffect(() => {
-        if (catStore.imgsArray.length === 0) {
-            loadNewImages();
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [catStore.imgsArray.length])
+        loadNewImages();
+    }, [])
 
     return (
         <SliderContainer>

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { PNG_CATEGORIES } from '../../models/Categories';
+import { useCatStore } from '../../store/CatStore';
 
 
 interface IDropDownMenuProps {
@@ -14,9 +15,22 @@ const capitalizeFirstLetter = (string: string) => {
 }
 
 export const DropDownMenu = ({ pinStatus, hoverStatus }: IDropDownMenuProps) => {
+    const catStore = useCatStore();
+
+    // If link changed then clear an array and GET new images
+    const clickHandle = (category: string) => {
+        catStore.resetCatArray();
+        catStore.resetImgLoadingID();
+        catStore.setCategory(category);
+        (async () => {
+            await catStore.fetchImages(catStore.currentCategory, 6);
+        })()
+    }
+
     const categoryList = PNG_CATEGORIES.map((category, index) =>
-        <Category key={index} to={"/" + category}>{capitalizeFirstLetter(category)}</Category >
+        <Category key={index} to={"/" + category} onClick={() => clickHandle(category)}>{capitalizeFirstLetter(category)}</Category >
     )
+
 
     return (
         <CategoriesContainer pinStatus={pinStatus} hoverStatus={hoverStatus}>
