@@ -1,14 +1,13 @@
 import { makeAutoObservable } from "mobx";
 import React from "react";
 import { ICatImage, IImageItem } from "../models/Cat";
-import { PNG_CATEGORIES } from "../models/Categories";
 import { getCats } from "../services/CatRest";
 import { WindowStoreInstance } from "./WindowStore";
 
 class CatStore {
     imgsArray: IImageItem[] = [];
     imgLoadingID = 0; // ID of image that is loading right now (or last when no images left to load)
-    currentCategory = PNG_CATEGORIES[0];
+    currentCategory = "";
 
     constructor() {
         makeAutoObservable(this)

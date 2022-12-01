@@ -41,7 +41,9 @@ export const Slider = observer(() => {
     useEffect(() => {
         windowStore.setScreenWidth(screenWidth);
         windowStore.setSliderCenter(0);
-        loadNewImages();
+        if (catStore.imgsArray.length == 0) {
+            loadNewImages();
+        }
     }, [])
 
     return (
