@@ -46,6 +46,13 @@ export const Slider = observer(() => {
         }
     }, [])
 
+    // First Initialization
+    useEffect(() => {
+        catStore.resetCatArray();
+        catStore.resetImgLoadingID();
+        loadNewImages();
+    }, [catStore.currentCategory])
+
     return (
         <SliderContainer>
             <ImgContainer ref={divRef} onWheel={wheelHandler} onScroll={scrollHandle} >

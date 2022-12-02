@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { PNG_CATEGORIES } from '../../models/Categories';
-import { useCatStore } from '../../store/CatStore';
 
 interface IDropDownMenuProps {
+    pinStatus: boolean
+    hoverStatus: boolean
+    categories: string[]
+}
+interface IDropDownMenuStyleProps {
     pinStatus: boolean
     hoverStatus: boolean
 }
@@ -13,13 +16,11 @@ const capitalizeFirstLetter = (string: string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export const DropDownMenu = ({ pinStatus, hoverStatus }: IDropDownMenuProps) => {
-    const catStore = useCatStore();
+export const DropDownMenu = ({ pinStatus, hoverStatus, categories }: IDropDownMenuProps) => {
 
-    const categoryList = PNG_CATEGORIES.map((category, index) =>
+    const categoryList = categories.map((category, index) =>
         <Category key={index} to={"/" + category}>{capitalizeFirstLetter(category)}</Category >
     )
-
 
     return (
         <CategoriesContainer pinStatus={pinStatus} hoverStatus={hoverStatus}>
@@ -30,7 +31,7 @@ export const DropDownMenu = ({ pinStatus, hoverStatus }: IDropDownMenuProps) => 
     )
 }
 
-const CategoriesContainer = styled.div<IDropDownMenuProps>`
+const CategoriesContainer = styled.div<IDropDownMenuStyleProps>`
     display: ${props => (props.pinStatus || props.hoverStatus) ? "block" : "none"};
     width: 100%;
     height: 50px;

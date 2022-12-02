@@ -3,21 +3,30 @@ import styled from 'styled-components';
 import mainLogo from '../../assets/icons/neko-heaven-logo.svg';
 import { DropDownMenu } from './DropDownMenu';
 import { Link } from 'react-router-dom';
+import { CAT_CATEGORIES, WAIFU_CATEGORIES } from '../../models/Categories';
 
 interface IMenuLinkProps {
     pinned: boolean
 }
 
 export const Header = () => {
-    const [isDropdownPinned, setIsDropdownPinned] = useState(false); // Pin for dropdown menu (you can show your dropdown menu even if you move mouse if you click on parent)
-    const [isDropdownHovered, setIsDropdownHovered] = useState(false);
+    const [isDropdownPinned1, setIsDropdownPinned1] = useState(false); // Pin for dropdown menu (you can show your dropdown menu even if you move mouse if you click on parent)
+    const [isDropdownPinned2, setIsDropdownPinned2] = useState(false); // Pin for dropdown menu (you can show your dropdown menu even if you move mouse if you click on parent)
+    const [isDropdownHovered1, setIsDropdownHovered1] = useState(false);
+    const [isDropdownHovered2, setIsDropdownHovered2] = useState(false);
 
-    const clickHandler = () => {
-        setIsDropdownPinned((pin) => !pin)
+    const clickHandler = (elemID: number) => {
+        if (elemID === 1)
+            setIsDropdownPinned1((pin) => !pin)
+        else if (elemID === 2)
+            setIsDropdownPinned2((pin) => !pin)
     }
 
-    const hoverHandler = () => {
-        setIsDropdownHovered((hover) => !hover)
+    const hoverHandler = (elemID: number) => {
+        if (elemID === 1)
+            setIsDropdownHovered1((hover) => !hover)
+        else if (elemID === 2)
+            setIsDropdownHovered2((hover) => !hover)
     }
 
     return (
@@ -29,12 +38,13 @@ export const Header = () => {
                 </LogoContainer>
             </LogoLink>
             <MenuUl>
-                <MenuLi onMouseEnter={hoverHandler} onMouseLeave={hoverHandler}>
-                    <MenuLink to="" pinned={isDropdownPinned} onClick={clickHandler}>Neko</MenuLink>
-                    <DropDownMenu pinStatus={isDropdownPinned} hoverStatus={isDropdownHovered} />
+                <MenuLi onMouseEnter={() => hoverHandler(1)} onMouseLeave={() => hoverHandler(1)}>
+                    <MenuLink to="" pinned={isDropdownPinned1} onClick={() => clickHandler(1)}>Neko</MenuLink>
+                    <DropDownMenu pinStatus={isDropdownPinned1} hoverStatus={isDropdownHovered1} categories={CAT_CATEGORIES} />
                 </MenuLi>
-                <MenuLi>
-                    <MenuLink to="" pinned={false}>Waifu</MenuLink>
+                <MenuLi onMouseEnter={() => hoverHandler(2)} onMouseLeave={() => hoverHandler(2)}>
+                    <MenuLink to="" pinned={isDropdownPinned2} onClick={() => clickHandler(2)}>Waifu</MenuLink>
+                    <DropDownMenu pinStatus={isDropdownPinned2} hoverStatus={isDropdownHovered2} categories={WAIFU_CATEGORIES} />
                 </MenuLi>
             </MenuUl>
         </HeaderContainer >

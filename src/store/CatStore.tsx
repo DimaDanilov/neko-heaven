@@ -1,7 +1,8 @@
 import { makeAutoObservable } from "mobx";
 import React from "react";
 import { ICatImage, IImageItem } from "../models/Cat";
-import { getCats } from "../services/CatRest";
+import { categoryApiType } from "../models/Categories";
+import { getCats, getWaifu } from "../services/CatRest";
 import { WindowStoreInstance } from "./WindowStore";
 
 class CatStore {
@@ -15,8 +16,14 @@ class CatStore {
 
     // GET new images from API
     async fetchImages(category: string, amount: number) {
-        const data = await getCats(category, amount)
-        this.setImages(data)
+        if (categoryApiType[this.currentCategory] === "neko") {
+            const data = await getCats(category, amount)
+            this.setImages(data)
+        }
+        else if (categoryApiType[this.currentCategory] === "waifu") {
+            const data = await getWaifu(category, amount)
+            this.setImages(data)
+        }
     }
 
     // SET new images to API
