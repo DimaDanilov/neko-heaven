@@ -77,7 +77,7 @@ const SliderContainer = styled.section`
     box-sizing: border-box;
 `
 const ImgContainer = styled.div`
-    padding: 0 10vw;
+    padding: 0 10vw 0 35vw;
     display: flex;
     overflow-x: auto;
     scroll-behavior: smooth;
