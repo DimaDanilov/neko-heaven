@@ -16,10 +16,14 @@ export const Header = () => {
     const [isDropdownHovered2, setIsDropdownHovered2] = useState(false);
 
     const clickHandler = (elemID: number) => {
-        if (elemID === 1)
+        if (elemID === 1) {
             setIsDropdownPinned1((pin) => !pin)
-        else if (elemID === 2)
+            setIsDropdownPinned2(false)
+        }
+        else if (elemID === 2) {
+            setIsDropdownPinned1(false)
             setIsDropdownPinned2((pin) => !pin)
+        }
     }
 
     const hoverHandler = (elemID: number) => {
