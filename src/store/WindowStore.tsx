@@ -1,6 +1,5 @@
 import React from "react";
 import { makeAutoObservable } from "mobx";
-import { CatStoreInstance } from "./CatStore";
 
 class WindowStore {
     screenWidth: number = NaN;
@@ -16,7 +15,6 @@ class WindowStore {
 
     setSliderCenter(scrollParam: number) {
         this.sliderCenter = scrollParam + (this.screenWidth / 2)
-        CatStoreInstance.countScaleOfAllImages();
     }
 }
 

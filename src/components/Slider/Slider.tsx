@@ -34,6 +34,7 @@ export const Slider = observer(() => {
     const scrollHandle = useCallback(() => {
         if (divRef.current) {
             windowStore.setSliderCenter(divRef.current.scrollLeft); // Count center of Slider again
+            catStore.countScaleOfAllImages();
             // If you are in end of slider fetch new images
             if (Math.abs(
                 (windowStore.sliderCenter + windowStore.screenWidth / 2)
@@ -56,6 +57,7 @@ export const Slider = observer(() => {
             windowStore.setScreenWidth(window.innerWidth);
             if (divRef.current) {
                 windowStore.setSliderCenter(divRef.current.scrollLeft);
+                catStore.countScaleOfAllImages();
             }
         });
     }, [])
