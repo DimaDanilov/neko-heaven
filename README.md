@@ -2,6 +2,10 @@
 
 Neko Heaven App is an app, used to display images of catgirls and anime-girls on custom slider.
 
+## Preview
+
+You can watch [Neko Heaven](https://dimadanilov.github.io/neko-heaven) here.
+
 ## Technology
 
 This project made on React with usage of MobX, TypeScript and 2 API's.
