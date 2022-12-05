@@ -6,7 +6,6 @@ import { observer } from "mobx-react-lite";
 import { ImageItem } from "./ImageItem";
 
 const scrollSpeedMultiplier = 6;
-const screenWidth = window.innerWidth;
 
 export const Slider = observer(() => {
     const catStore = useCatStore();
@@ -39,14 +38,21 @@ export const Slider = observer(() => {
 
     // First Initialization
     useEffect(() => {
-        windowStore.setScreenWidth(screenWidth);
+        windowStore.setScreenWidth(window.innerWidth);
         windowStore.setSliderCenter(0);
         if (catStore.imgsArray.length == 0) {
             loadNewImages();
         }
+        // Observer on resize of window
+        window.addEventListener('resize', () => {
+            windowStore.setScreenWidth(window.innerWidth);
+            if (divRef.current) {
+                windowStore.setSliderCenter(divRef.current.scrollLeft);
+            }
+        });
     }, [])
 
-    // First Initialization
+    // When category change recreate slider
     useEffect(() => {
         catStore.resetCatArray();
         catStore.resetImgLoadingID();

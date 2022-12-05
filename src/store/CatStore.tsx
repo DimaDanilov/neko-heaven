@@ -58,7 +58,7 @@ class CatStore {
     countScaleOfImage(id: number) {
         if (((WindowStoreInstance.sliderCenter - WindowStoreInstance.screenWidth) < this.imgsArray[id].position) &&
             (this.imgsArray[id].position < (WindowStoreInstance.sliderCenter + WindowStoreInstance.screenWidth))) {
-            let newImageHeight = (-(((this.imgsArray[id].position - WindowStoreInstance.sliderCenter) ** 2) / (((WindowStoreInstance.screenWidth / 2) / 8) ** 2)) + 100) / 100;
+            let newImageHeight = (-(((this.imgsArray[id].position - WindowStoreInstance.sliderCenter) ** 2) / (((WindowStoreInstance.screenWidth / 1.5) / 8) ** 2)) + 100) / 100;
             if (newImageHeight > 0) {
                 this.imgsArray[id].scale = (Number(newImageHeight.toFixed(2)));
             }
@@ -72,15 +72,10 @@ class CatStore {
     }
 
     // SET scale of all images
-    countScaleOfAllImages(id?: number) {
-        if (id) {
-            this.countScaleOfImage(id)
-        }
-        else {
-            this.imgsArray.forEach((_imgPosition, imgID) => {
-                this.countScaleOfImage(imgID)
-            })
-        }
+    countScaleOfAllImages() {
+        this.imgsArray.forEach((_imgPosition, imgID) => {
+            this.countScaleOfImage(imgID)
+        })
     }
 
     // SET img loading ID to next (to load next image)
