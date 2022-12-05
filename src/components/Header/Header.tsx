@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { CAT_CATEGORIES, WAIFU_CATEGORIES } from '../../models/Categories';
 
 interface IMenuLinkProps {
-    pinned: boolean
+    $pinned: boolean
 }
 
 export const Header = () => {
@@ -43,11 +43,11 @@ export const Header = () => {
             </LogoLink>
             <MenuUl>
                 <MenuLi onMouseEnter={() => hoverHandler(1)} onMouseLeave={() => hoverHandler(1)}>
-                    <MenuLink to="" pinned={isDropdownPinned1} onClick={() => clickHandler(1)}>Neko</MenuLink>
+                    <MenuLink to="" $pinned={isDropdownPinned1} onClick={() => clickHandler(1)}>Neko</MenuLink>
                     <DropDownMenu pinStatus={isDropdownPinned1} hoverStatus={isDropdownHovered1} categories={CAT_CATEGORIES} />
                 </MenuLi>
                 <MenuLi onMouseEnter={() => hoverHandler(2)} onMouseLeave={() => hoverHandler(2)}>
-                    <MenuLink to="" pinned={isDropdownPinned2} onClick={() => clickHandler(2)}>Waifu</MenuLink>
+                    <MenuLink to="" $pinned={isDropdownPinned2} onClick={() => clickHandler(2)}>Waifu</MenuLink>
                     <DropDownMenu pinStatus={isDropdownPinned2} hoverStatus={isDropdownHovered2} categories={WAIFU_CATEGORIES} />
                 </MenuLi>
             </MenuUl>
@@ -90,7 +90,7 @@ const MenuLink = styled(Link) <IMenuLinkProps>`
     justify-content: center;
     align-items: center;
     transition: all 0.25s ease-out;
-    background-color: ${props => props.pinned ? "#f995b4" : ""};
+    background-color: ${props => props.$pinned ? "#f995b4" : ""};
     &:hover {
         background-color: #fea4bd;
     }
