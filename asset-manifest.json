@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/neko-heaven/static/css/main.6bb17e1e.css",
-    "main.js": "/neko-heaven/static/js/main.e0b79aee.js",
+    "main.js": "/neko-heaven/static/js/main.f7e18f37.js",
     "static/js/787.add13f32.chunk.js": "/neko-heaven/static/js/787.add13f32.chunk.js",
     "static/media/Inter-SemiBold.ttf": "/neko-heaven/static/media/Inter-SemiBold.4d56bb21f2399db8ad48.ttf",
     "static/media/Inter-Light.ttf": "/neko-heaven/static/media/Inter-Light.eec8664621fec98efb37.ttf",
@@ -10,11 +10,11 @@
     "static/media/neko-heaven-logo.svg": "/neko-heaven/static/media/neko-heaven-logo.3fbb9432185390b1f42cbff66a1d24ae.svg",
     "index.html": "/neko-heaven/index.html",
     "main.6bb17e1e.css.map": "/neko-heaven/static/css/main.6bb17e1e.css.map",
-    "main.e0b79aee.js.map": "/neko-heaven/static/js/main.e0b79aee.js.map",
+    "main.f7e18f37.js.map": "/neko-heaven/static/js/main.f7e18f37.js.map",
     "787.add13f32.chunk.js.map": "/neko-heaven/static/js/787.add13f32.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6bb17e1e.css",
-    "static/js/main.e0b79aee.js"
+    "static/js/main.f7e18f37.js"
   ]
 }
