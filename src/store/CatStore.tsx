@@ -9,6 +9,7 @@ class CatStore {
     imgsArray: IImageItem[] = [];
     imgLoadingID = 0; // ID of image that is loading right now (or last when no images left to load)
     currentCategory = "";
+    imagesAreLoading = false; // Status of img downloading. If they are already download then don't start new download
 
     constructor() {
         makeAutoObservable(this)
@@ -16,13 +17,21 @@ class CatStore {
 
     // GET new images from API
     async fetchImages(category: string, amount: number) {
-        if (categoryApiType[this.currentCategory] === "neko") {
-            const data = await getCats(category, amount)
-            this.setImages(data)
-        }
-        else if (categoryApiType[this.currentCategory] === "waifu") {
-            const data = await getWaifu(category, amount)
-            this.setImages(data)
+        if (this.imgLoadingID === this.imgsArray.length) { // Start fetch if last img is downloaded
+            if (!this.imagesAreLoading) { // Start fetch only if status is acquire to do it
+                if (categoryApiType[this.currentCategory] === "neko") {
+                    this.setImagesLoadingStatus(true);
+                    const data = await getCats(category, amount)
+                    this.setImages(data)
+                    this.setImagesLoadingStatus(false);
+                }
+                else if (categoryApiType[this.currentCategory] === "waifu") {
+                    this.setImagesLoadingStatus(true);
+                    const data = await getWaifu(category, amount)
+                    this.setImages(data)
+                    this.setImagesLoadingStatus(false);
+                }
+            }
         }
     }
 
@@ -86,6 +95,11 @@ class CatStore {
     // SET img loading ID to 0
     resetImgLoadingID() {
         this.imgLoadingID = 0
+    }
+
+    // SET if imgs already loading status
+    setImagesLoadingStatus(status: boolean) {
+        this.imagesAreLoading = status;
     }
 }
 

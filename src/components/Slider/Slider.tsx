@@ -6,6 +6,7 @@ import { observer } from "mobx-react-lite";
 import { ImageItem } from "./ImageItem";
 
 const scrollSpeedMultiplier = 6;
+const sectionPadding = 20; // Padding of the main section. Need a variable because it's calculated for needs in autoload new images
 
 export const Slider = observer(() => {
     const catStore = useCatStore();
@@ -33,6 +34,13 @@ export const Slider = observer(() => {
     const scrollHandle = useCallback(() => {
         if (divRef.current) {
             windowStore.setSliderCenter(divRef.current.scrollLeft); // Count center of Slider again
+            // If you are in end of slider fetch new images
+            if (Math.abs(
+                (windowStore.sliderCenter + windowStore.screenWidth / 2)
+                - (divRef.current.scrollWidth + sectionPadding * 2)
+            ) <= window.innerWidth / 8) {
+                loadNewImages();
+            }
         }
     }, [])
 
@@ -40,7 +48,7 @@ export const Slider = observer(() => {
     useEffect(() => {
         windowStore.setScreenWidth(window.innerWidth);
         windowStore.setSliderCenter(0);
-        if (catStore.imgsArray.length == 0) {
+        if (catStore.imgsArray.length === 0) {
             loadNewImages();
         }
         // Observer on resize of window
@@ -67,14 +75,13 @@ export const Slider = observer(() => {
                     <ImageItem key={cat.catInfo.url + index} cat={cat} />
                 )}
             </ImgContainer>
-            <button onClick={loadNewImages}>LOAD NEW IMAGES</button>
         </SliderContainer>
     )
 });
 
 const SliderContainer = styled.section`
     height: calc(100vh - 50px);
-    padding: 20px;
+    padding: ${sectionPadding}px;
     display: flex;
     justify-content: center;
     align-items: center;
