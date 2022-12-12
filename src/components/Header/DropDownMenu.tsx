@@ -39,8 +39,9 @@ const CategoriesContainer = styled.div<IDropDownMenuStyleProps>`
     z-index: 1;
     top: 50px;
     left: 0;
-    background: linear-gradient(#E184C0B4, #CE7BB0B4);
+    background: linear-gradient(#E9A8D2, #D49BBF);
     @media (max-width: 768px) {
+        background: linear-gradient(#E184C0B4, #c272a4b4);
         height: fit-content;
     }
 `

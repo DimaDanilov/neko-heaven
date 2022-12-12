@@ -15,35 +15,28 @@ interface IMenuLinkProps {
 
 export const Header = () => {
     // Pins for dropdown menu (you can show your dropdown menu even if you move mouse if you click on parent)
-    const [isDropdownPinned1, setIsDropdownPinned1] = useState(false);
-    const [isDropdownPinned2, setIsDropdownPinned2] = useState(false);
-    const [isDropdownPinned3, setIsDropdownPinned3] = useState(false);
-    const [isDropdownHovered1, setIsDropdownHovered1] = useState(false);
-    const [isDropdownHovered2, setIsDropdownHovered2] = useState(false);
+    const [isDropdownPinned, setIsDropdownPinned] = useState([false, false, false])
+    const [isDropdownHovered, setIsDropdownHovered] = useState([false, false])
 
     const clickHandler = (elemID: number) => {
         if (elemID === 1) {
-            setIsDropdownPinned1((pin) => !pin)
-            setIsDropdownPinned2(false)
-            setIsDropdownPinned3(false)
+            setIsDropdownPinned([!isDropdownPinned[0], false, false])
         }
         else if (elemID === 2) {
-            setIsDropdownPinned1(false)
-            setIsDropdownPinned2((pin) => !pin)
-            setIsDropdownPinned3(false)
+            setIsDropdownPinned([false, !isDropdownPinned[1], false])
         }
         else if (elemID === 3) {
-            setIsDropdownPinned1(false)
-            setIsDropdownPinned2(false)
-            setIsDropdownPinned3((pin) => !pin)
+            setIsDropdownPinned([false, false, !isDropdownPinned[2]])
         }
     }
 
     const hoverHandler = (elemID: number) => {
-        if (elemID === 1)
-            setIsDropdownHovered1((hover) => !hover)
-        else if (elemID === 2)
-            setIsDropdownHovered2((hover) => !hover)
+        if (elemID === 1) {
+            setIsDropdownHovered([!isDropdownHovered[0], false])
+        }
+        else if (elemID === 2) {
+            setIsDropdownHovered([false, !isDropdownHovered[1]])
+        }
     }
 
     return (
@@ -57,18 +50,18 @@ export const Header = () => {
 
             <MenuUl>
                 <MenuLi onMouseEnter={() => hoverHandler(1)} onMouseLeave={() => hoverHandler(1)}>
-                    <MenuLink to="" $pinned={isDropdownPinned1} onClick={() => clickHandler(1)}>Neko</MenuLink>
-                    <DropDownMenu pinStatus={isDropdownPinned1} hoverStatus={isDropdownHovered1} categories={CAT_CATEGORIES} />
+                    <MenuLink to="" $pinned={isDropdownPinned[0]} onClick={() => clickHandler(1)}>Neko</MenuLink>
+                    <DropDownMenu pinStatus={isDropdownPinned[0]} hoverStatus={isDropdownHovered[0]} categories={CAT_CATEGORIES} />
                 </MenuLi>
                 <MenuLi onMouseEnter={() => hoverHandler(2)} onMouseLeave={() => hoverHandler(2)}>
-                    <MenuLink to="" $pinned={isDropdownPinned2} onClick={() => clickHandler(2)}>Waifu</MenuLink>
-                    <DropDownMenu pinStatus={isDropdownPinned2} hoverStatus={isDropdownHovered2} categories={WAIFU_CATEGORIES} />
+                    <MenuLink to="" $pinned={isDropdownPinned[1]} onClick={() => clickHandler(2)}>Waifu</MenuLink>
+                    <DropDownMenu pinStatus={isDropdownPinned[1]} hoverStatus={isDropdownHovered[1]} categories={WAIFU_CATEGORIES} />
                 </MenuLi>
             </MenuUl>
 
             <BurgerMenuContainer onClick={() => clickHandler(3)}>
-                <BurgerMenu $pinned={isDropdownPinned3}></BurgerMenu>
-                <DropDownMenu pinStatus={isDropdownPinned3} categories={CAT_CATEGORIES.concat(WAIFU_CATEGORIES)} />
+                <BurgerMenu $pinned={isDropdownPinned[2]}></BurgerMenu>
+                <DropDownMenu pinStatus={isDropdownPinned[2]} categories={CAT_CATEGORIES.concat(WAIFU_CATEGORIES)} />
             </BurgerMenuContainer>
 
         </HeaderContainer>
@@ -107,7 +100,7 @@ const BurgerMenu = styled.div <IBurgerMenuProps>`
     }
     background-color: ${props => props.$pinned ? "#ffb2ca0" : "#fff"};
 `
-  
+
 const HeaderContainer = styled.header`
     position: relative;
     background: linear-gradient(#FFBCD1, #FFB2CA);
