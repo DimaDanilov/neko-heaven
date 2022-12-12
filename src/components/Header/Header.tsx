@@ -10,8 +10,10 @@ interface IMenuLinkProps {
 }
 
 export const Header = () => {
-    const [isDropdownPinned1, setIsDropdownPinned1] = useState(false); // Pin for dropdown menu (you can show your dropdown menu even if you move mouse if you click on parent)
-    const [isDropdownPinned2, setIsDropdownPinned2] = useState(false); // Pin for dropdown menu (you can show your dropdown menu even if you move mouse if you click on parent)
+    // Pins for dropdown menu (you can show your dropdown menu even if you move mouse if you click on parent)
+    const [isDropdownPinned1, setIsDropdownPinned1] = useState(false);
+    const [isDropdownPinned2, setIsDropdownPinned2] = useState(false);
+    const [isDropdownPinned3, setIsDropdownPinned3] = useState(false);
     const [isDropdownHovered1, setIsDropdownHovered1] = useState(false);
     const [isDropdownHovered2, setIsDropdownHovered2] = useState(false);
 
@@ -19,10 +21,17 @@ export const Header = () => {
         if (elemID === 1) {
             setIsDropdownPinned1((pin) => !pin)
             setIsDropdownPinned2(false)
+            setIsDropdownPinned3(false)
         }
         else if (elemID === 2) {
             setIsDropdownPinned1(false)
             setIsDropdownPinned2((pin) => !pin)
+            setIsDropdownPinned3(false)
+        }
+        else if (elemID === 3) {
+            setIsDropdownPinned1(false)
+            setIsDropdownPinned2(false)
+            setIsDropdownPinned3((pin) => !pin)
         }
     }
 
@@ -41,6 +50,7 @@ export const Header = () => {
                     <MainLogoName>Neko Heaven</MainLogoName>
                 </LogoContainer>
             </LogoLink>
+
             <MenuUl>
                 <MenuLi onMouseEnter={() => hoverHandler(1)} onMouseLeave={() => hoverHandler(1)}>
                     <MenuLink to="" $pinned={isDropdownPinned1} onClick={() => clickHandler(1)}>Neko</MenuLink>
@@ -51,9 +61,44 @@ export const Header = () => {
                     <DropDownMenu pinStatus={isDropdownPinned2} hoverStatus={isDropdownHovered2} categories={WAIFU_CATEGORIES} />
                 </MenuLi>
             </MenuUl>
-        </HeaderContainer >
+
+            <BurgerMenuContainer onClick={() => clickHandler(3)}>
+                <BurgerMenu></BurgerMenu>
+                <DropDownMenu pinStatus={isDropdownPinned3} categories={CAT_CATEGORIES.concat(WAIFU_CATEGORIES)} />
+            </BurgerMenuContainer>
+
+        </HeaderContainer>
     )
 }
+
+const BurgerMenuContainer = styled.div`
+    width: 30px;
+    margin: 0 5%;
+    display: none;
+    @media (max-width: 768px) {
+        display: block;
+    }
+`
+
+const BurgerMenu = styled.div`
+    &, &:before, &:after {
+        display: block;
+        background-color: #fff;
+        position: absolute;
+        height: 4px;
+        width: 30px;
+        transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+        border-radius: 2px;
+    }
+    &:before{
+        content: '';
+        margin-top: -8px;
+    }
+    &:after {
+        content: '';
+        margin-top: 8px;
+    }
+`
 
 const HeaderContainer = styled.header`
     position: relative;
@@ -62,21 +107,31 @@ const HeaderContainer = styled.header`
     display: flex;
     justify-content: start;
     align-items: center;
+    @media (max-width: 768px) {
+        justify-content: space-between;
+    }
 `
 const LogoContainer = styled.div`
     display: flex;
     align-items: center;
+    margin: 0 5%;
     height: 100%;
     gap: 8%;
 `
 const MenuUl = styled.ul`
     display: flex;
     height: 100%;
+    margin: 0 5%;
+    padding: 0;
+    @media (max-width: 768px) {
+        display: none;
+    }
 `
 const MenuLi = styled.li`
     list-style: none;
     height: 100%;
     display: flex;
+    overflow: hidden;
 `
 const MenuLink = styled(Link) <IMenuLinkProps>`
     cursor: pointer;

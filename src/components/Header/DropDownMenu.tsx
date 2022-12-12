@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 interface IDropDownMenuProps {
     pinStatus: boolean
-    hoverStatus: boolean
+    hoverStatus?: boolean
     categories: string[]
 }
 interface IDropDownMenuStyleProps {
@@ -23,7 +23,7 @@ export const DropDownMenu = ({ pinStatus, hoverStatus, categories }: IDropDownMe
     )
 
     return (
-        <CategoriesContainer pinStatus={pinStatus} hoverStatus={hoverStatus}>
+        <CategoriesContainer pinStatus={pinStatus} hoverStatus={hoverStatus ? hoverStatus : false}>
             <CategoriesList>
                 {categoryList}
             </CategoriesList>
@@ -39,7 +39,10 @@ const CategoriesContainer = styled.div<IDropDownMenuStyleProps>`
     z-index: 1;
     top: 50px;
     left: 0;
-    background: linear-gradient(#E184C0, #CE7BB0);
+    background: linear-gradient(#E184C0B4, #CE7BB0B4);
+    @media (max-width: 768px) {
+        height: fit-content;
+    }
 `
 const Category = styled(Link)`
     color: white;
@@ -47,7 +50,7 @@ const Category = styled(Link)`
     font-size: 22px;
     font-family: "InterLight";
     height: 100%;
-    padding: 0 20px 0 0;
+    padding: 0 30px 0 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -70,6 +73,10 @@ const Category = styled(Link)`
         width: 100%;
         background: #FFBCD1;
     }
+
+    @media (max-width: 768px) {
+        padding: 10px 30px 10px 0;
+    }
 `
 const CategoriesList = styled.div`
     height: 100%;
@@ -78,5 +85,8 @@ const CategoriesList = styled.div`
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    gap: 30px;
+    @media (max-width: 768px) {
+        height: fit-content;
+        flex-direction: column;
+    }
 `
