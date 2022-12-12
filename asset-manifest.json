@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/neko-heaven/static/css/main.6bb17e1e.css",
-    "main.js": "/neko-heaven/static/js/main.f7e18f37.js",
+    "main.js": "/neko-heaven/static/js/main.4d1243f2.js",
     "static/js/787.add13f32.chunk.js": "/neko-heaven/static/js/787.add13f32.chunk.js",
     "static/media/Inter-SemiBold.ttf": "/neko-heaven/static/media/Inter-SemiBold.4d56bb21f2399db8ad48.ttf",
     "static/media/Inter-Light.ttf": "/neko-heaven/static/media/Inter-Light.eec8664621fec98efb37.ttf",
     "static/media/Poly-Regular.ttf": "/neko-heaven/static/media/Poly-Regular.ea05f170d79450a0e423.ttf",
-    "static/media/stock-image.svg": "/neko-heaven/static/media/stock-image.c15614da9e7854d166d564b563dfc3d3.svg",
-    "static/media/neko-heaven-logo.svg": "/neko-heaven/static/media/neko-heaven-logo.3fbb9432185390b1f42cbff66a1d24ae.svg",
+    "static/media/stock-image.svg": "/neko-heaven/static/media/stock-image.242e65ac3d3cc40f3e1f3ea13c84c83e.svg",
+    "static/media/neko-heaven-logo.svg": "/neko-heaven/static/media/neko-heaven-logo.839a3bedae84bd3cbfb6fca3334fbc51.svg",
     "index.html": "/neko-heaven/index.html",
     "main.6bb17e1e.css.map": "/neko-heaven/static/css/main.6bb17e1e.css.map",
-    "main.f7e18f37.js.map": "/neko-heaven/static/js/main.f7e18f37.js.map",
+    "main.4d1243f2.js.map": "/neko-heaven/static/js/main.4d1243f2.js.map",
     "787.add13f32.chunk.js.map": "/neko-heaven/static/js/787.add13f32.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6bb17e1e.css",
-    "static/js/main.f7e18f37.js"
+    "static/js/main.4d1243f2.js"
   ]
 }
