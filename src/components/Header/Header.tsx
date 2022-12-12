@@ -41,7 +41,7 @@ export const Header = () => {
 
     return (
         <HeaderContainer>
-            <LogoLink to="/">
+            <LogoLink to={"/" + CAT_CATEGORIES[0]}>
                 <LogoContainer>
                     <MainLogoImg src={mainLogo} />
                     <MainLogoName>Neko Heaven</MainLogoName>

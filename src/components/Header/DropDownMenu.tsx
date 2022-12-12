@@ -44,6 +44,12 @@ const CategoriesContainer = styled.div<IDropDownMenuStyleProps>`
         background: linear-gradient(#E184C0B4, #c272a4b4);
         height: fit-content;
     }
+    overflow-x: auto;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 `
 const Category = styled(Link)`
     color: white;
