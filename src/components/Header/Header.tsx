@@ -5,6 +5,10 @@ import { DropDownMenu } from './DropDownMenu';
 import { Link } from 'react-router-dom';
 import { CAT_CATEGORIES, WAIFU_CATEGORIES } from '../../models/Categories';
 
+interface IBurgerMenuProps {
+    $pinned: boolean
+}
+
 interface IMenuLinkProps {
     $pinned: boolean
 }
@@ -63,7 +67,7 @@ export const Header = () => {
             </MenuUl>
 
             <BurgerMenuContainer onClick={() => clickHandler(3)}>
-                <BurgerMenu></BurgerMenu>
+                <BurgerMenu $pinned={isDropdownPinned3}></BurgerMenu>
                 <DropDownMenu pinStatus={isDropdownPinned3} categories={CAT_CATEGORIES.concat(WAIFU_CATEGORIES)} />
             </BurgerMenuContainer>
 
@@ -80,10 +84,9 @@ const BurgerMenuContainer = styled.div`
     }
 `
 
-const BurgerMenu = styled.div`
+const BurgerMenu = styled.div <IBurgerMenuProps>`
     &, &:before, &:after {
         display: block;
-        background-color: #fff;
         position: absolute;
         height: 4px;
         width: 30px;
@@ -92,14 +95,19 @@ const BurgerMenu = styled.div`
     }
     &:before{
         content: '';
-        margin-top: -8px;
+        margin-top: ${props => props.$pinned ? "0px" : "-8px"};
+        transform: ${props => props.$pinned ? "rotate(45deg)" : ""};
+        background-color: #fff;
     }
     &:after {
         content: '';
-        margin-top: 8px;
+        margin-top: ${props => props.$pinned ? "0px" : "8px"};
+        transform: ${props => props.$pinned ? "rotate(-45deg)" : ""};
+        background-color: #fff;
     }
+    background-color: ${props => props.$pinned ? "#ffb2ca0" : "#fff"};
 `
-
+  
 const HeaderContainer = styled.header`
     position: relative;
     background: linear-gradient(#FFBCD1, #FFB2CA);
