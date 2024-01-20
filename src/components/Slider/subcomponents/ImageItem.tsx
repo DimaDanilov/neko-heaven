@@ -1,16 +1,16 @@
 import { useLayoutEffect, useRef } from "react";
 import styled from "styled-components";
-import defaultImage from "../../../assets/images/stock-image.svg";
-import { useCatStore } from "../../../store/CatStore";
+import defaultImage from "assets/images/stock-image.svg";
+import { useCatStore } from "store/CatStore";
 import { observer } from "mobx-react-lite";
-import { IImageItem } from "../../../types/Cat";
+import type { IImageItem } from "types/Cat";
 
 interface IImageItemProps {
   cat: IImageItem;
 }
 
 interface IImageProps {
-  imageScale: number;
+  $imageScale: number;
 }
 
 export const ImageItem = observer(({ cat }: IImageItemProps) => {
@@ -42,13 +42,13 @@ export const ImageItem = observer(({ cat }: IImageItemProps) => {
           ? defaultImage
           : cat.catInfo.url
       }
-      imageScale={cat.scale}
+      $imageScale={cat.scale}
     />
   );
 });
 
 const SliderImage = styled.img<IImageProps>`
   alt: "";
-  transform: scale(${(props) => props.imageScale});
+  transform: scale(${(props) => props.$imageScale});
   height: 100%;
 `;

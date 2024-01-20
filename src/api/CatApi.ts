@@ -1,6 +1,6 @@
-import { ICatImage } from "../types/Cat";
-import { ApiType } from "../types/Categories";
-import { CatAdapter } from "./CatAdapter";
+import type { ICatImage } from "types/Cat";
+import type { ApiType } from "types/Categories";
+import { CatAdapter } from "api/CatAdapter";
 
 export interface ICatImageArray {
   results: ICatImage[];

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import styled from "styled-components";
-import mainLogo from "../../../assets/icons/neko-heaven-logo.svg";
-import { DropDownMenu } from "./subcomponents/DropDownMenu";
+import mainLogo from "assets/icons/neko-heaven-logo.svg";
+import { DropDownMenu } from "components/common/Header/subcomponents/DropDownMenu";
 import { Link } from "react-router-dom";
-import { CAT_CATEGORIES, WAIFU_CATEGORIES } from "../../../types/Categories";
+import { CAT_CATEGORIES, WAIFU_CATEGORIES } from "types/Categories";
 
 interface IBurgerMenuProps {
   $pinned: boolean;

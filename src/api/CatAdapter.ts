@@ -1,5 +1,5 @@
-import { ICatImage } from "../types/Cat";
-import { ApiType } from "../types/Categories";
+import type { ICatImage } from "types/Cat";
+import type { ApiType } from "types/Categories";
 
 export class CatAdapter {
   static transform(data: any, api: ApiType): ICatImage[] {

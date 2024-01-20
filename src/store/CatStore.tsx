@@ -1,9 +1,9 @@
 import { makeAutoObservable } from "mobx";
 import React from "react";
-import { ICatImage, IImageItem } from "../types/Cat";
-import { categoryApiType, validApiTypes } from "../types/Categories";
-import { getNekoPictures } from "../api/CatApi";
-import { WindowStoreInstance } from "./WindowStore";
+import type { ICatImage, IImageItem } from "types/Cat";
+import { categoryApiType, validApiTypes } from "types/Categories";
+import { getNekoPictures } from "api/CatApi";
+import { WindowStoreInstance } from "store/WindowStore";
 
 class CatStore {
   imgsArray: IImageItem[] = [];

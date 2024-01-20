@@ -1,9 +1,9 @@
 import { useRef, useCallback, useEffect } from "react";
 import styled from "styled-components";
-import { useCatStore } from "../../store/CatStore";
-import { useWindowStore } from "../../store/WindowStore";
+import { useCatStore } from "store/CatStore";
+import { useWindowStore } from "store/WindowStore";
 import { observer } from "mobx-react-lite";
-import { ImageItem } from "./subcomponents/ImageItem";
+import { ImageItem } from "components/Slider/subcomponents/ImageItem";
 
 const scrollSpeedMultiplier = 6;
 const sectionPadding = 20; // Padding of the main section. Need a variable because it's calculated for needs in autoload new images

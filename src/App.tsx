@@ -1,11 +1,11 @@
 import "./App.css";
-import { Header } from "./components/common/Header/Header";
-import { Slider } from "./components/Slider/Slider";
+import { Header } from "components/common/Header/Header";
+import { Slider } from "components/Slider/Slider";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { categoryApiType, CAT_CATEGORIES } from "./types/Categories";
+import { categoryApiType, CAT_CATEGORIES } from "types/Categories";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { useCatStore } from "./store/CatStore";
+import { useCatStore } from "store/CatStore";
 
 const categoriesRoutes = Object.keys(categoryApiType).map((category, index) => (
   <Route
