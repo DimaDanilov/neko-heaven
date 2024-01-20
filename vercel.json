@@ -1,0 +1,16 @@
+{
+  "routes": [
+    { "src": "/", "dest": "/" },
+    { "src": "/neko", "dest": "/" },
+    { "src": "/husbando", "dest": "/" },
+    { "src": "/kitsune", "dest": "/" },
+    { "src": "/waifu", "dest": "/" },
+    { "src": "/maid", "dest": "/" },
+    { "src": "/marin-kitagawa", "dest": "/" },
+    { "src": "/mori-calliope", "dest": "/" },
+    { "src": "/raiden-shogun", "dest": "/" },
+    { "src": "/oppai", "dest": "/" },
+    { "src": "/selfies", "dest": "/" },
+    { "src": "/uniform", "dest": "/" }
+  ]
+}

@@ -101,6 +101,7 @@ const CategoriesList = styled.div`
   justify-content: space-evenly;
   align-items: center;
   @media (max-width: 768px) {
+    width: 100%;
     height: fit-content;
     flex-direction: column;
   }
