@@ -1,10 +1,10 @@
-# Neko Heaven <img src="./public/main_logo_dark.svg" alt="Neko Heaven Logo" width="30"/>
+# Neko Heaven <img src="./public/main_logo.svg" alt="Neko Heaven Logo" width="30"/>
 
 Neko Heaven App is an app, used to display images of catgirls and anime-girls on custom slider.
 
 ## Preview
 
-You can watch [Neko Heaven](https://dimadanilov.github.io/neko-heaven) here.
+You can watch [Neko Heaven](https://neko-heaven.vercel.app/) here.
 
 ## Technology
 
