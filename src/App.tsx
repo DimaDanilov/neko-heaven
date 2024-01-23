@@ -6,6 +6,7 @@ import { categoryApiType, CAT_CATEGORIES } from "types/Categories";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useCatStore } from "store/CatStore";
+import { Analytics } from "@vercel/analytics/react";
 
 const categoriesRoutes = Object.keys(categoryApiType).map((category, index) => (
   <Route
@@ -39,6 +40,7 @@ function App() {
         {categoriesRoutes}
         <Route path="*" element={<Navigate to={CAT_CATEGORIES[0]} />} />
       </Routes>
+      <Analytics />
     </>
   );
 }
