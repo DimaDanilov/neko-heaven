@@ -3,7 +3,11 @@ import styled from "styled-components";
 import mainLogo from "assets/icons/neko-heaven-logo.svg";
 import { DropDownMenu } from "components/common/Header/subcomponents/DropDownMenu";
 import { Link } from "react-router-dom";
-import { CAT_CATEGORIES, WAIFU_CATEGORIES } from "types/Categories";
+import {
+  CAT_CATEGORIES,
+  WAIFUIM_CATEGORIES,
+  WAIFUPICS_CATEGORIES,
+} from "types/Categories";
 
 interface IBurgerMenuProps {
   $pinned: boolean;
@@ -19,24 +23,33 @@ export const Header = () => {
     false,
     false,
     false,
+    false,
   ]);
-  const [isDropdownHovered, setIsDropdownHovered] = useState([false, false]);
+  const [isDropdownHovered, setIsDropdownHovered] = useState([
+    false,
+    false,
+    false,
+  ]);
 
   const clickHandler = (elemID: number) => {
     if (elemID === 1) {
-      setIsDropdownPinned([!isDropdownPinned[0], false, false]);
+      setIsDropdownPinned([!isDropdownPinned[0], false, false, false]);
     } else if (elemID === 2) {
-      setIsDropdownPinned([false, !isDropdownPinned[1], false]);
+      setIsDropdownPinned([false, !isDropdownPinned[1], false, false]);
     } else if (elemID === 3) {
-      setIsDropdownPinned([false, false, !isDropdownPinned[2]]);
+      setIsDropdownPinned([false, false, !isDropdownPinned[2], false]);
+    } else if (elemID === 4) {
+      setIsDropdownPinned([false, false, false, !isDropdownPinned[3]]); // Last one for burger menu
     }
   };
 
   const hoverHandler = (elemID: number) => {
     if (elemID === 1) {
-      setIsDropdownHovered([!isDropdownHovered[0], false]);
+      setIsDropdownHovered([!isDropdownHovered[0], false, false]);
     } else if (elemID === 2) {
-      setIsDropdownHovered([false, !isDropdownHovered[1]]);
+      setIsDropdownHovered([false, !isDropdownHovered[1], false]);
+    } else if (elemID === 3) {
+      setIsDropdownHovered([false, false, !isDropdownHovered[2]]);
     }
   };
 
@@ -76,21 +89,40 @@ export const Header = () => {
             $pinned={isDropdownPinned[1]}
             onClick={() => clickHandler(2)}
           >
-            Waifu
+            Waifu.im
           </MenuLink>
           <DropDownMenu
             pinStatus={isDropdownPinned[1]}
             hoverStatus={isDropdownHovered[1]}
-            categories={WAIFU_CATEGORIES}
+            categories={WAIFUIM_CATEGORIES}
+          />
+        </MenuLi>
+        <MenuLi
+          onMouseEnter={() => hoverHandler(3)}
+          onMouseLeave={() => hoverHandler(3)}
+        >
+          <MenuLink
+            to=""
+            $pinned={isDropdownPinned[2]}
+            onClick={() => clickHandler(3)}
+          >
+            Waifu.pics
+          </MenuLink>
+          <DropDownMenu
+            pinStatus={isDropdownPinned[2]}
+            hoverStatus={isDropdownHovered[2]}
+            categories={WAIFUPICS_CATEGORIES}
           />
         </MenuLi>
       </MenuUl>
 
-      <BurgerMenuContainer onClick={() => clickHandler(3)}>
-        <BurgerMenu $pinned={isDropdownPinned[2]}></BurgerMenu>
+      <BurgerMenuContainer onClick={() => clickHandler(4)}>
+        <BurgerMenu $pinned={isDropdownPinned[3]}></BurgerMenu>
         <DropDownMenu
-          pinStatus={isDropdownPinned[2]}
-          categories={CAT_CATEGORIES.concat(WAIFU_CATEGORIES)}
+          pinStatus={isDropdownPinned[3]}
+          categories={CAT_CATEGORIES.concat(WAIFUIM_CATEGORIES).concat(
+            WAIFUPICS_CATEGORIES
+          )}
         />
       </BurgerMenuContainer>
     </HeaderContainer>

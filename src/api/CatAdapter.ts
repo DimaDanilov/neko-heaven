@@ -14,7 +14,7 @@ export class CatAdapter {
               url: item.url,
             }
         );
-      case "waifu":
+      case "waifu.im":
         return data.map(
           (item: any) =>
             <ICatImage>{
@@ -22,6 +22,16 @@ export class CatAdapter {
               artistName: "",
               sourceUrl: item.source,
               url: item.url,
+            }
+        );
+      case "waifu.pics":
+        return data.map(
+          (item: any) =>
+            <ICatImage>{
+              artistHref: "",
+              artistName: "",
+              sourceUrl: item,
+              url: item,
             }
         );
     }
